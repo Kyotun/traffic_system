@@ -52,6 +52,7 @@ public:
 	virtual void vAusgeben() const override;
     virtual void vAusgeben(ostream& ausgabe)const override;
     static void vKopf();
+    virtual void vSimulieren() override;
 
 protected:
 	// Double Variablen
