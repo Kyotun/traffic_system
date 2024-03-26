@@ -35,6 +35,7 @@ public:
 
     // Ueberladen der Operatoren
 	bool operator==(const Simulationsobjekt& andere);
+    Simulationsobjekt& operator=(const Simulationsobjekt& other);
 
 protected:
 	// Strings

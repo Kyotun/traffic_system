@@ -60,3 +60,16 @@ bool Simulationsobjekt::operator==(const Simulationsobjekt& andere){
 	return false;
 
 }
+
+// Ueberladen des Zuweisungsoperators
+Simulationsobjekt& Simulationsobjekt::operator=(const Simulationsobjekt& other) {
+	//Kontrolliere ob das Objekt selbst aufruft.
+	if (this == &other) {
+		return *this;
+	}
+
+	this->p_sName = other.getName();
+	this->p_dZeit = other.getZeit();
+
+	return *this;
+}
