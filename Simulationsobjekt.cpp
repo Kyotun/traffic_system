@@ -45,10 +45,18 @@ void Simulationsobjekt::vAusgeben(ostream& ausgabe) const{
 		     << setw(15) << getName();
 }
 
-
 void Simulationsobjekt::vEinlesen(istream& is){
 	if(is.fail()){
 		throw runtime_error("Fehler beim Einlesen der Eingabe Stream.");
 	}
 	is >> p_sName;
+}
+
+// Ueberladen des Gleichheitoperators
+bool Simulationsobjekt::operator==(const Simulationsobjekt& andere){
+	if(this->p_iID == andere.p_iID){
+		return true;
+	}
+	return false;
+
 }

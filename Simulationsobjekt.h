@@ -33,6 +33,9 @@ public:
     virtual void vSimulieren() = 0;
     virtual void vEinlesen(istream& is);
 
+    // Ueberladen der Operatoren
+	bool operator==(const Simulationsobjekt& andere);
+
 protected:
 	// Strings
 	string p_sName = "";
