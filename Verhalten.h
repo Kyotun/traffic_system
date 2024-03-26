@@ -20,6 +20,9 @@ public:
 	// Getters
 	Weg* getpWeg() const{return p_pWeg;}
 
+    // Double
+	virtual double dStrecke(Fahrzeug& aFzg, double dZeitIntervall) = 0;
+
 protected:
 	Weg* p_pWeg = nullptr;
 private:
