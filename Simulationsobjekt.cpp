@@ -44,3 +44,11 @@ void Simulationsobjekt::vAusgeben(ostream& ausgabe) const{
 			 << setw(8) << getID()
 		     << setw(15) << getName();
 }
+
+
+void Simulationsobjekt::vEinlesen(istream& is){
+	if(is.fail()){
+		throw runtime_error("Fehler beim Einlesen der Eingabe Stream.");
+	}
+	is >> p_sName;
+}

@@ -30,6 +30,8 @@ public:
     // Voids
 	virtual void vAusgeben() const;
     virtual void vAusgeben(ostream& ausgabe) const;
+    virtual void vSimulieren() = 0;
+    virtual void vEinlesen(istream& is);
 
 protected:
 	// Strings
