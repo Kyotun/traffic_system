@@ -48,6 +48,9 @@ public:
 	virtual double dGeschwindigkeit() const{return p_dMaxGeschwindigkeit;}; 
     virtual double dTanken(double dMenge = std::numeric_limits<double>::infinity()){return 0.0;};
 
+    // Void&Print Funktionen
+	virtual void vAusgeben() const override;
+
 protected:
 	// Double Variablen
 	double p_dMaxGeschwindigkeit = 0.0;
