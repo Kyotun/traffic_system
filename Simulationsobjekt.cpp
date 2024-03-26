@@ -26,3 +26,12 @@ Simulationsobjekt::Simulationsobjekt(string p_sName): p_sName(p_sName){
 			 << "' und mit der ID " << p_iID
 			 << " erzeugt." << endl;
 }
+
+// Ausgeben von Objekten mit Punktoperator und die Methode vAusgeben.
+void Simulationsobjekt::vAusgeben() const{
+	cout << resetiosflags(ios::adjustfield)
+		 << setiosflags(ios::left)
+		 << setprecision(2) << fixed
+		 << setw(8) << getID()
+		 << setw(15) << getName();
+}
