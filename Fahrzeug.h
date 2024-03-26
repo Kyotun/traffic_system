@@ -54,6 +54,7 @@ public:
     static void vKopf();
     virtual void vSimulieren() override;
     void vNeueStrecke(Weg& weg);
+    void vNeueStrecke(Weg& weg, double dStartZeitpunkt);
 
 protected:
 	// Double Variablen

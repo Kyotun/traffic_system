@@ -110,3 +110,15 @@ void Fahrzeug::vNeueStrecke(Weg& weg){
 	this->vResetAbschnittStrecke();
 	cout << "Fahrzeug " << p_sName << " ist in den Weg " << weg.getName() << " zum Fahren angekommen." << endl;
 }
+
+// Wenn ein Fahrzeug von einem Weg akzeptiert wurde, soll es auch diesen Weg in sich selbst anerkannt machen.
+// Diese Method fuer die parkende Fahrzeuge.
+// Parkende Fahrzeuge warten bis die Globalezeit gleich Startzeitpunkt ist.
+void Fahrzeug::vNeueStrecke(Weg& weg, double dStartZeitpunkt){
+	if(p_pVerhalten){
+		p_pVerhalten.reset();
+	}
+	p_pVerhalten = make_unique<Parken>(weg, dStartZeitpunkt);
+	this->vResetAbschnittStrecke();
+	cout << "Fahrzeug " << p_sName << " ist in den Weg " << weg.getName() << " zum Parken angekommen." << endl;
+}
