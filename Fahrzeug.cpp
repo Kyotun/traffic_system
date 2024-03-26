@@ -31,3 +31,16 @@ void Fahrzeug::vAusgeben() const{
 		 << setw(20) << getAbschnittStrecke()
 		 << setw(20) << dGeschwindigkeit();
 }
+
+// Ausgabe Funktion, die zum Ausgeben von der Eigenschaften der Objekten dient.
+// Es reicht nur das Objekt zu cout zu geben.
+void Fahrzeug::vAusgeben(ostream& ausgabe) const {
+
+	Simulationsobjekt::vAusgeben(ausgabe);
+	ausgabe << resetiosflags(ios::left)
+			<< setiosflags(ios::right)
+			<< setw(20) << getMaxGeschwindigkeit()
+			<< setw(20) << getGesamtstrecke()
+			<< setw(20) << getAbschnittStrecke()
+			<< setw(20) << dGeschwindigkeit();
+}

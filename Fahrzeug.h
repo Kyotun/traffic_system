@@ -50,6 +50,7 @@ public:
 
     // Void&Print Funktionen
 	virtual void vAusgeben() const override;
+    virtual void vAusgeben(ostream& ausgabe)const override;
 
 protected:
 	// Double Variablen
