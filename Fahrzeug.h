@@ -55,6 +55,7 @@ public:
     virtual void vSimulieren() override;
     void vNeueStrecke(Weg& weg);
     void vNeueStrecke(Weg& weg, double dStartZeitpunkt);
+    virtual void vEinlesen(istream& is) override;
 
 protected:
 	// Double Variablen

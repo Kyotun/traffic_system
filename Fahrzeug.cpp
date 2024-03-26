@@ -122,3 +122,8 @@ void Fahrzeug::vNeueStrecke(Weg& weg, double dStartZeitpunkt){
 	this->vResetAbschnittStrecke();
 	cout << "Fahrzeug " << p_sName << " ist in den Weg " << weg.getName() << " zum Parken angekommen." << endl;
 }
+
+void Fahrzeug::vEinlesen(istream& is){
+	Simulationsobjekt::vEinlesen(is);
+	is >> p_dMaxGeschwindigkeit;
+}
