@@ -61,4 +61,8 @@ private:
 // Aber getters werden benötigt, um die private bzw. protected Bereiche erreichen zu können.
 ostream& operator<<(ostream& ausgabe, const Simulationsobjekt& simuobjekt);
 
+// Ueberladung von operator>>(Eingabe Operator)
+// Die Attributen koennen einfach durch die einkommende Eingabe eingesetzt werden.
+istream& operator>>(istream& is, Simulationsobjekt& simuobjekt);
+
 #endif /* SIMULATIONSOBJEKT_H_ */

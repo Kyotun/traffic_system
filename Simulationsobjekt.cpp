@@ -80,3 +80,9 @@ ostream& operator<<(ostream& ausgabe,const Simulationsobjekt& simuobjekt) {
 	simuobjekt.vAusgeben(ausgabe);
 	return ausgabe;
 }
+
+// Ueberladen des Eingabe Operators
+istream& operator>>(istream& is, Simulationsobjekt& simuobjekt){
+	simuobjekt.vEinlesen(is);
+    return is;
+}
