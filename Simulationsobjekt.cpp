@@ -35,3 +35,12 @@ void Simulationsobjekt::vAusgeben() const{
 		 << setw(8) << getID()
 		 << setw(15) << getName();
 }
+
+// Ausgeben von Objekten einfach mit cout<< (opreator<<)
+void Simulationsobjekt::vAusgeben(ostream& ausgabe) const{
+	ausgabe << resetiosflags(ios::adjustfield)
+			 << setiosflags(ios::left)
+			 << setprecision(2) << fixed
+			 << setw(8) << getID()
+		     << setw(15) << getName();
+}

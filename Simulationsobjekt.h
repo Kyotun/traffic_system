@@ -29,6 +29,7 @@ public:
 
     // Voids
 	virtual void vAusgeben() const;
+    virtual void vAusgeben(ostream& ausgabe) const;
 
 protected:
 	// Strings
