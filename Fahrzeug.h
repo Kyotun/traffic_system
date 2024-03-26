@@ -44,6 +44,10 @@ public:
 	void setAbschnittStrecke(double dAbschnittStrecke){this->p_dAbschnittStrecke = dAbschnittStrecke;}
 	void vResetAbschnittStrecke(){this->p_dAbschnittStrecke = 0;}
 
+    // Doubles
+	virtual double dGeschwindigkeit() const{return p_dMaxGeschwindigkeit;}; 
+    virtual double dTanken(double dMenge = std::numeric_limits<double>::infinity()){return 0.0;};
+
 protected:
 	// Double Variablen
 	double p_dMaxGeschwindigkeit = 0.0;
