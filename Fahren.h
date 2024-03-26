@@ -14,9 +14,11 @@ public:
 	Fahren() : Verhalten(){}
 	Fahren(Weg& weg): Verhalten(weg){}
 
+    // Fuer das Ausrechnen der aktuelle zuruckgelegte Strecke.
+	virtual double dStrecke(Fahrzeug& fahrzeug, double dZeitDifferenz) override;
+
 protected:
 private:
 };
-
 
 #endif /* FAHREN_H_ */
