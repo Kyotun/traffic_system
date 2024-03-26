@@ -73,3 +73,10 @@ Simulationsobjekt& Simulationsobjekt::operator=(const Simulationsobjekt& other) 
 
 	return *this;
 }
+
+// Ueberladen des Ausgabeoperators
+// Dank dieses Ueberladen, darf die Fahrzeuge einfach mit cout<<(operator <<) ausgegeben werden.
+ostream& operator<<(ostream& ausgabe,const Simulationsobjekt& simuobjekt) {
+	simuobjekt.vAusgeben(ausgabe);
+	return ausgabe;
+}
