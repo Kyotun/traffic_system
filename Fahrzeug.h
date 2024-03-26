@@ -57,6 +57,10 @@ public:
     void vNeueStrecke(Weg& weg, double dStartZeitpunkt);
     virtual void vEinlesen(istream& is) override;
 
+    // Ueberladen der operatoren
+	bool operator<(const Fahrzeug& andere) const;
+    
+
 protected:
 	// Double Variablen
 	double p_dMaxGeschwindigkeit = 0.0;

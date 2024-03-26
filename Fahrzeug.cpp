@@ -127,3 +127,13 @@ void Fahrzeug::vEinlesen(istream& is){
 	Simulationsobjekt::vEinlesen(is);
 	is >> p_dMaxGeschwindigkeit;
 }
+
+// Ueberladen des '<' (kleiner als) operators
+// Wenn das Vergleichobjekt groesser ist, ist diese Bedingung richtig.
+bool Fahrzeug::operator<(const Fahrzeug& andere)const{
+	if(this->getGesamtstrecke() < andere.getGesamtstrecke()){
+		return true;
+	} else{
+		return false;
+	}
+}
