@@ -18,6 +18,15 @@ public:
 	// Destruktor
 	virtual ~Simulationsobjekt();
 
+    // Getters
+	string getName() const{return p_sName;}
+	double getZeit() const {return p_dZeit;}
+	int getID() const {return p_iID;}
+
+    // Setters
+	void setName(string p_sName){this->p_sName = p_sName;}
+	void setZeit(double p_dZeit){this->p_dZeit = p_dZeit;}
+
 protected:
 	// Strings
 	string p_sName = "";
