@@ -53,6 +53,7 @@ public:
     virtual void vAusgeben(ostream& ausgabe)const override;
     static void vKopf();
     virtual void vSimulieren() override;
+    void vNeueStrecke(Weg& weg);
 
 protected:
 	// Double Variablen

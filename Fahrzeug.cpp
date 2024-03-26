@@ -99,3 +99,14 @@ void Fahrzeug::vSimulieren(){
 
 	}
 }
+
+// Wenn ein Fahrzeug von einem Weg akzeptiert wurde, soll es auch diesen Weg in sich selbst anerkannt machen.
+// Diese Method fuer die fahrende Fahrzeuge
+void Fahrzeug::vNeueStrecke(Weg& weg){
+	if(p_pVerhalten){
+		p_pVerhalten.reset();
+	}
+	p_pVerhalten = make_unique<Fahren>(weg);
+	this->vResetAbschnittStrecke();
+	cout << "Fahrzeug " << p_sName << " ist in den Weg " << weg.getName() << " zum Fahren angekommen." << endl;
+}
