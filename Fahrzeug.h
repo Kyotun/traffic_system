@@ -59,7 +59,8 @@ public:
 
     // Ueberladen der operatoren
 	bool operator<(const Fahrzeug& andere) const;
-    
+    Fahrzeug& operator=(const Fahrzeug& other);
+
 
 protected:
 	// Double Variablen

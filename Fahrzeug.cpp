@@ -137,3 +137,16 @@ bool Fahrzeug::operator<(const Fahrzeug& andere)const{
 		return false;
 	}
 }
+
+// ueberladen des Operators '='
+// Ausser ID Attribute, wird alles kopiert und uebertragen.
+Fahrzeug& Fahrzeug::operator=(const Fahrzeug& other) {
+	// Kontrolliere ob das Objekt selbst aufruft.
+	Simulationsobjekt::operator =(other);
+	this->p_dMaxGeschwindigkeit = other.getMaxGeschwindigkeit();
+	this->p_dGesamtstrecke = other.getGesamtstrecke();
+	this->p_dZeit = other.getZeit();
+	this->p_dGesamtZeit = other.getGesamtZeit();
+
+	return *this;
+}
