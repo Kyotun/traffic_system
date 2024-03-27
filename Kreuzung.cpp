@@ -123,3 +123,8 @@ void Kreuzung::vSimulieren(){
 		(*it)->vSimulieren();
 	}
 }
+
+void Kreuzung::vEinlesen(istream& is){
+	Simulationsobjekt::vEinlesen(is);
+	is >> p_dTankstelle;
+}

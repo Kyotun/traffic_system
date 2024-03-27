@@ -46,6 +46,8 @@ public:
     void vTanken(Fahrzeug& fahrzeug);
     void vAnnahme(unique_ptr<Fahrzeug> fahrzeug, double dStartzeit);
     void vSimulieren() override;
+    void vEinlesen(istream& is) override;
+
 
 protected:
 private:
