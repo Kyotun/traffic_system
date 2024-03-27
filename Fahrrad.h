@@ -15,6 +15,9 @@ public:
     // Doubles
 	double dGeschwindigkeit() const override; // Minimal 12km /h , pro 20km %10 Abnahme
 
+    // Void&Print
+	void vAusgeben() const override;
+
 private:
 
 };

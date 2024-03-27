@@ -53,3 +53,13 @@ double Fahrrad::dGeschwindigkeit() const{
 
 	return d_aktuelleGeschwindigkeit;
 }
+
+// Ausgabefunktion der Klasse Fahrrad, erbt von Fahrzeug und werden einige Fahrradspezifische Eigenschaften addiert.
+// Diese Funktion ist eine Objektmethode. Der Punktoperator soll verwendet werden.
+void Fahrrad::vAusgeben() const{
+	Fahrzeug::vAusgeben();
+	cout << setw(20) << "-"
+	   	 << setw(15) << "-"
+		 << setw(10) << getZeit()
+		 << setw(15) << getGlobaleZeit() << endl;
+}
