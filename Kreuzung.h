@@ -48,6 +48,8 @@ public:
     void vSimulieren() override;
     void vEinlesen(istream& is) override;
 
+    // Bool Funktionen
+	bool istInWegList(Weg& weg);
 
 protected:
 private:

@@ -128,3 +128,17 @@ void Kreuzung::vEinlesen(istream& is){
 	Simulationsobjekt::vEinlesen(is);
 	is >> p_dTankstelle;
 }
+
+// Kontrolliere, ob uebergebenen Weg in der Liste p_pWege ist.
+bool Kreuzung::istInWegList(Weg& weg){
+	if(p_pWege.empty()){
+		throw runtime_error("Diese Kreuzung " + getName() + " enthaelt keinen Weg.");
+	}
+
+	for(auto& wegPtr : p_pWege){
+		if(wegPtr.get() == &weg){
+			return true;
+		}
+	}
+	return false;
+}
