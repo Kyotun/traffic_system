@@ -43,6 +43,7 @@ void vAufgabe_6();
 void vAufgabe_6a();
 void vAufgabe_6b();
 void vAufgabe_7();
+void vAufgabe_8();
 
 int main(){
 	// vAufgabe_1();
@@ -56,6 +57,7 @@ int main(){
     // vAufgabe_6a();
     // vAufgabe_6b();
     // vAufgabe_7();
+    // vAufgabe_8();
 	return 0;
 }
 
@@ -784,5 +786,37 @@ void vAufgabe_7(){
 		vSleep(500);
 	}
 	vBeendeGrafik();
+}
 
+// Lese die Daten der Objekte aus Einer Datei
+// Gibt eine Ausnahme aus, wenn es einen Fehler gibt.(Z.B: Eroeffnung einer Datei)
+// Wenn es keinen Fehler gibt, gibt die Daten der Objekten aus.
+void vAufgabe_8(){
+
+	ifstream inputFile("VO.dat");
+
+	try{
+
+		if(!inputFile.is_open()){
+			throw runtime_error("Fehler bei der Eroerffnung der Datei.");
+		}
+
+		PKW porsche;
+		Fahrrad rennrad;
+		Kreuzung kr1;
+
+		inputFile >> porsche >> rennrad >> kr1;
+
+		Fahrzeug::vKopf();
+		cout << porsche;
+		cout << rennrad;
+		cout << kr1 << endl;
+
+		inputFile.close();
+
+	} catch(const runtime_error& e){
+		cerr << "Aufgefangene Exception: " << e.what() << endl;
+	} catch(...){
+		cerr << "Unbekannter Fehler." << endl;
+	}
 }
