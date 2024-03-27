@@ -34,10 +34,12 @@ double dGlobaleZeit = 0.0;
 
 void vAufgabe_1();
 void vAufgabe_1a();
+void vAufgabe_2();
 
 int main(){
 	// vAufgabe_1();
     // vAufgabe_1a();
+    // vAufgabe_2();
 	return 0;
 }
 
@@ -174,6 +176,94 @@ void vAufgabe_1a(){
 		for(const auto& fahrzeug: fahrzeuge){
 			cout << *fahrzeug << endl;
 			fahrzeug->vSimulieren();
+		}
+	}
+}
+
+void vAufgabe_2(){
+	int iPkwAnzahl, iFahrradAnzahl;
+
+	string sName;
+	double dGeschwindigkeit = 0.0;
+	double dVerbrauch = 0.0;
+	string sTankVolumen;
+
+	vector<unique_ptr<Fahrzeug>> fahrzeuge;
+
+	// Fragt nach dem Benutzer, wie viele Anzahl der Objekte er erzeugen will.
+	// Einlesen der Anzahlen von PKWs und Fahrraeder
+	cout << "Wie viele PKWs moechten Sie erstellen?" << endl;
+	cin >> iPkwAnzahl;
+
+	cout << "Wie viele Fahrraeder moechten Sie erstellen?" << endl;
+	cin >> iFahrradAnzahl;
+
+	// Erzeuge die Objekte mit der eingelesenen Eigenschaften und nach gegebenen Typen.
+	cout << "Bitte geben Sie jetzt die Eigenschaften der PKWs vom Ersten bis Letzem ein.\n";
+	for(int i = 0; i < iPkwAnzahl; i++){
+		cout << "1) Name: ";
+		cin >> sName;
+
+		cout << "2) Maximale Geschwindigkeit: ";
+		cin >> dGeschwindigkeit;
+
+		cout << "3) Verbrauch: ";
+		cin >> dVerbrauch;
+
+		// Mann muss vorsicht sein, wenn die Stringeingaben eingelesen werden.
+		// Das Verhalten des cin Operators ist anders fuer Strings.
+		// Hier soll getline Methode benutzt werden.
+		getline(cin, sTankVolumen);
+		cout << "4) Tankvolumen(optinal, default 55 liter angenommen.): ";
+		getline(cin, sTankVolumen);
+
+		// Kontrolliere ob der Benutzer optionalen Eingabe eingegeben hat.
+		// Wenn ja, erzeuge das PKW mit 3 Parametern.
+		// Wenn nein, formt den Eingabe von string um den double Wert um und dann erzeuge das PKW.
+		// Letztes gibt das Objekt in die Vektor ein.
+		if(sTankVolumen == ""){
+			unique_ptr<PKW> pkw = make_unique<PKW>(sName, dGeschwindigkeit, dVerbrauch);
+			fahrzeuge.push_back(std::move(pkw));
+		} else{
+			unique_ptr<PKW> pkw = make_unique<PKW>(sName, dGeschwindigkeit, dVerbrauch, stod(sTankVolumen));
+			fahrzeuge.push_back(std::move(pkw));
+		}
+	}
+
+	// Erzeuge die Objekte mit der eingelesene Eigenschaften nach gegebenen Typen.
+	cout << "Bitte geben Sie nun die Eigenschaften der Fahrraeder vom Ersten bis Letzem ein.\n";
+	for(int j = 0; j < iFahrradAnzahl; j++){
+		cout << "1) Name: ";
+		cin >> sName;
+
+		cout << "2) Maximale Geschwindigkeit: ";
+		cin >> dGeschwindigkeit;
+
+		// Erzeuge das Fahrrad Objekt.
+		// Dann gibt das Objekt in die Vektor ein.
+		unique_ptr<Fahrrad> fahrrad = make_unique<Fahrrad>(sName, dGeschwindigkeit);
+		fahrzeuge.push_back(std::move(fahrrad));
+	}
+
+	// In jeder x.x Stunden werden die Taenke der PKWs aufgefuellt.
+	double dTankZeit = 0.0;
+	cout << endl << "Bitte geben Sie eine Period fuer Tanken der PKWs: ";
+	cin >> dTankZeit;
+
+	// Wie lange eine Simulationsschritt dauert? -> dEpsilon
+	double dEpsilon = 0.0; // Zeittakt.
+	cout << endl << "Bitte geben Sie eine Period fuer die Simulation(lieber als Bruchteile von Studen): ";
+	cin >> dEpsilon;
+
+	// Gibt die Eigenschaften der Objekte aufm Bildschrim formatiert aus.
+	Fahrzeug::vKopf();
+	for(dGlobaleZeit = dEpsilon; dGlobaleZeit < 5; dGlobaleZeit += dEpsilon){
+		for(const auto& fahrzeug : fahrzeuge){
+			cout << *fahrzeug;
+			fahrzeug->vSimulieren();
+			if(fmod(dGlobaleZeit,dTankZeit) < dEpsilon){
+				fahrzeug->dTanken(fahrzeug->getTankvolumen());
+			}
 		}
 	}
 }
