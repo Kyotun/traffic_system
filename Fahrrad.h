@@ -20,6 +20,7 @@ public:
     void vAusgeben(ostream& ausgabe) const override;
     void vSimulieren() override;
     void vZeichnen(const Weg& weg) override;
+    void vEinlesen(istream& is) override;
 
 private:
 
