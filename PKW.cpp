@@ -85,3 +85,28 @@ double PKW::dTanken(double dMenge){
 
 	return (p_dTankinhalt - dTankinhaltVorher);
 }
+
+// Simulationfunktion von PKWs.
+// In jeder Zeittakt, in der die PKWs similuert werden, wird die aktuelle Tankvolumen berechnet
+// und dann wird der Inhalt der aktuelle Tankvolumen abnehmen.
+// Kontrolliere ob der Tankinhalt groeßer null ist, wenn nicht, darf das PKW nicht weiter simuliert.
+void PKW::vSimulieren() {
+
+	if(p_dTankinhalt <= 0){
+		p_dZeit = dGlobaleZeit;
+		cout << "Der Tank des Fahrzeugs '"
+			 << p_sName
+			 << "' ist leer. Es darf nicht fahren und soll getankt werden."
+			 << endl;
+		return;
+	}
+
+	double dGesamtstreckeVorher = p_dGesamtstrecke;
+	Fahrzeug::vSimulieren();
+	double dVerbrauchtTankVolumen = (p_dGesamtstrecke - dGesamtstreckeVorher)*(p_dVerbrauch/100);
+	double dAktuellTankVolumen = p_dTankinhalt - dVerbrauchtTankVolumen;
+	if(dAktuellTankVolumen < 0){
+		dAktuellTankVolumen = 0;
+	}
+	p_dTankinhalt = dAktuellTankVolumen;
+}

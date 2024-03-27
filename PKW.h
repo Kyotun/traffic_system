@@ -33,6 +33,9 @@ public:
 	double dGeschwindigkeit() const override;
     double dTanken(double dMenge = std::numeric_limits<double>::infinity()) override;
 
+    // Void&Print Funktionen
+	void vSimulieren() override;
+
 private:
 	// Double Variablen
 	double p_dVerbrauch = 0.0; // Liter / 100 km
