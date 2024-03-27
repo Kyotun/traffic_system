@@ -840,7 +840,7 @@ void vAufgabe_9(){
 	// Nachdem der die Variable eingesetzt hat, wird der die Kreuzungen fuer der innerhalb gegebenen Zeit simulieren.
 	// Achtung! -> Bei dieser Aufgabe gibt es keine grafische Ausgabe.
 	Simulation simulator;
-	ifstream inputFile("/Users/kyotun/Desktop/rwth-prinf/Aufgabenblock_3/src/Simu6.dat");
+	ifstream inputFile("Simu6.dat");
 	if (!inputFile.is_open()) {
 		throw runtime_error("InputFile konnte nicht geoeffnet werden.");
 	}
@@ -864,7 +864,7 @@ void vAufgabe_9a(){
 	// Nachdem der die Variable eingesetzt hat, wird der die Kreuzungen fuer der innerhalb gegebenen Zeit simulieren.
 	// Achtung! -> Bei dieser Aufgabe gibt es grafische Ausgabe.
 	Simulation simulator;
-	ifstream inputFile("/Users/kyotun/Desktop/rwth-prinf/Aufgabenblock_3/src/SimuDisplay.dat");
+	ifstream inputFile("SimuDisplay.dat");
 	if (!inputFile.is_open()) {
 		throw runtime_error("InputFile konnte nicht geoeffnet werden.");
 	}
