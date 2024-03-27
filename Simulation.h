@@ -14,6 +14,9 @@ using namespace std;
 class Simulation{
 public:
 
+    // Voids
+	void vCheckDoppelKreuzung(const string& name);
+
     // Checkers
 	void vCheckKreuzungName(string name);
 

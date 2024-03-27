@@ -16,6 +16,14 @@
 using namespace std;
 extern double dGlobaleZeit;
 
+
+// Kontrolliere, ob der gegebene Name sich im Map schon befindet.
+void Simulation::vCheckDoppelKreuzung(const string& name){
+	if(kreuzungenMap.find(name) != kreuzungenMap.end()){
+		throw runtime_error("Es gibt bereits eine andere Kreuzunge unter der Name: " + name);
+	}
+}
+
 // Wenn die Laenge des Names der Kreuzung nicht drei ist, gibt eine Ausnahme zurueck.
 void Simulation::vCheckKreuzungName(string name){
 	if(name.length() != 3){
