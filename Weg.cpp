@@ -36,3 +36,15 @@ double Weg::getTempolimit() const{
 	cout << fixed << setprecision(2);
 	return (double)p_eTempolimit;
 }
+
+Tempolimit Weg::gettTempolimit() const{
+	switch((int)getTempolimit()){
+		case 50:
+			return Innerorts;
+		case 100:
+			return Landstrasse;
+		default :
+			return Autobahn;
+		}
+
+}

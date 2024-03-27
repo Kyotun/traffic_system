@@ -24,6 +24,7 @@ public:
 
 	// Getters
     double getTempolimit() const;
+    Tempolimit gettTempolimit() const;
 	double getLaenge() const{return p_dLaenge;}
 	double getSchranke()const{return this->p_dSchranke;}
 	VListe<unique_ptr<Fahrzeug>>* getFahrzeugList(){return &p_pFahrzeuge;}
