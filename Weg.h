@@ -51,6 +51,7 @@ public:
     void vAusgeben() const override;
     void vAusgeben(ostream& ausgabes) const override;
     void static vKopf();
+    void vAnnahme(unique_ptr<Fahrzeug> fahrzeug);
 
 protected:
 private:

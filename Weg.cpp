@@ -178,5 +178,11 @@ void Weg::vKopf() {
 		 << setw(15) << "| Fahrzeuge" << endl;
 
 	cout << setw(8+15*3) << setfill('-') << '-' << setfill(' ') << endl;
+}
 
+// Uebergebene Fahrzeug wird als fahrend in der Liste p_pFahrzeuge gesetzt.
+void Weg::vAnnahme(unique_ptr<Fahrzeug>fahrzeug){
+	fahrzeug->vNeueStrecke(*this);
+	p_pFahrzeuge.push_back(std::move(fahrzeug));
+	p_pFahrzeuge.vAktualisieren();
 }
