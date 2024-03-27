@@ -36,11 +36,14 @@ void vAufgabe_1();
 void vAufgabe_1a();
 void vAufgabe_2();
 void vAufgabe_3();
+void vAufgabe_AB1();
 
 int main(){
 	// vAufgabe_1();
     // vAufgabe_1a();
     // vAufgabe_2();
+    // vAufgabe_3();
+    // vAufgabe_AB1();
 	return 0;
 }
 
@@ -348,4 +351,38 @@ void vAufgabe_3(){
 	delete fahrrad1;
 	delete fahrrad2;
 	delete fahrzeug2;
+}
+
+void vAufgabe_AB1() {
+
+   int l = 0; // Laufindex fuer gezielte AUsgabe
+   vector<int> ausgabe{15};
+   double dTakt = 0.3;
+
+   std::vector<unique_ptr<Fahrzeug>> vecFahrzeuge;
+   vecFahrzeuge.push_back(make_unique <PKW>("Audi", 229, 9.6));
+   vecFahrzeuge.push_back(make_unique <Fahrrad>("BMX", 24.7));
+   for (dGlobaleZeit = 0; dGlobaleZeit < 5; dGlobaleZeit += dTakt)
+   {
+       auto itL = find(ausgabe.begin(), ausgabe.end(), l);
+       if (itL != ausgabe.end()) {
+           std::cout << std::endl << l <<  " Globalezeit = " << dGlobaleZeit << std::endl;
+           Fahrzeug::vKopf();
+       }
+
+       for (int i = 0; i < (int) vecFahrzeuge.size(); i++)
+       {
+           vecFahrzeuge[i]->vSimulieren();
+           if (fabs(dGlobaleZeit - 3.0) < dTakt/2)
+           {
+               vecFahrzeuge[i]->dTanken();
+           }
+           if (itL != ausgabe.end()) {
+               std::cout << *vecFahrzeuge[i] << endl;
+           }
+       }
+       l++;
+   }
+   char c;
+   std::cin >> c;
 }
