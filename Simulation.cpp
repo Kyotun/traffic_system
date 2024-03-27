@@ -34,6 +34,11 @@ void Simulation::vCheckDoppelKreuzung(const string& name){
 	}
 }
 
+void Simulation::vAddKreuzung(const string& name, shared_ptr<Kreuzung> kreuzung) {
+	vCheckDoppelKreuzung(name);
+	kreuzungenMap[name] = kreuzung;
+}
+
 // Wenn die Laenge des Names der Kreuzung nicht drei ist, gibt eine Ausnahme zurueck.
 void Simulation::vCheckKreuzungName(string name){
 	if(name.length() != 3){
