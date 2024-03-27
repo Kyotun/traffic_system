@@ -16,6 +16,13 @@
 using namespace std;
 extern double dGlobaleZeit;
 
+// Wenn die Laenge des Names der Kreuzung nicht drei ist, gibt eine Ausnahme zurueck.
+void Simulation::vCheckKreuzungName(string name){
+	if(name.length() != 3){
+		throw runtime_error("Name der Kreuzung soll wie Kr1 aussehen. Gegeben: " + name);
+	}
+}
+
 // Waehlt ein Tempolimit aus, nach der gegebenen integer Zahl.
 Tempolimit Simulation::convertTempolimit(int iTempolimit){
 	switch(iTempolimit){

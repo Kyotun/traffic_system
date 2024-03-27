@@ -14,6 +14,9 @@ using namespace std;
 class Simulation{
 public:
 
+    // Checkers
+	void vCheckKreuzungName(string name);
+
     // Converters
 	Tempolimit convertTempolimit(int iTempolimit);
 
