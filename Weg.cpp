@@ -30,3 +30,9 @@ Weg::Weg(string sName, // @suppress("Class members should be properly initialize
 	p_eTempolimit(eTempolimit),
 	p_bUeberholverbot(bUeberholverbot) {
 }
+
+// Wird das Tempolimit des Wegs zurueckgegeben
+double Weg::getTempolimit() const{
+	cout << fixed << setprecision(2);
+	return (double)p_eTempolimit;
+}

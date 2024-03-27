@@ -23,6 +23,7 @@ public:
 	Weg(string sName, double dLaenge, weak_ptr<Kreuzung>pZielkreuzung ,Tempolimit eTempolimit= Tempolimit::Autobahn, bool bUeberholverbot = true);
 
 	// Getters
+    double getTempolimit() const;
 	double getLaenge() const{return p_dLaenge;}
 	double getSchranke()const{return this->p_dSchranke;}
 	VListe<unique_ptr<Fahrzeug>>* getFahrzeugList(){return &p_pFahrzeuge;}
