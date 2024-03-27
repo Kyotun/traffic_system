@@ -118,3 +118,13 @@ void PKW::vAusgeben() const {
 		 << setw(10) << getZeit()
 		 << setw(15) << getGlobaleZeit() << endl;
 }
+
+// Erbt die Ausgebenfunktion von der Fahrzeugklasse und f
+// uege in der Ausgabefunktion die besondere Einheiten von PKws hinzu.
+void PKW::vAusgeben(ostream& ausgabe) const{
+	Fahrzeug::vAusgeben(ausgabe);
+	ausgabe << setw(20) << getGesamtVerbrauch()
+			<< setw(15) << getTankinhalt()
+		    << setw(10) << getZeit()
+		    << setw(15) << getGlobaleZeit() << endl;
+}
