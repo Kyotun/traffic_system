@@ -35,6 +35,7 @@ double dGlobaleZeit = 0.0;
 void vAufgabe_1();
 void vAufgabe_1a();
 void vAufgabe_2();
+void vAufgabe_3();
 
 int main(){
 	// vAufgabe_1();
@@ -266,4 +267,85 @@ void vAufgabe_2(){
 			}
 		}
 	}
+}
+
+void vAufgabe_3(){
+	// Unterschied zwischen ptr Objekt(fahrrad1, fahrrad2, fahrzeug2) und nicht ptr Objekt(pkw1, pkw2) zu beachten.
+	// Es ist nicht gut, traditionaller Pointer zu nutzen. Lieber kann man smart Pointers benutzen.
+
+	// Erzeuge einige Fahrzeuge/PKWs und Fahrraeder Objekte.
+	unique_ptr<Fahrzeug> fahrzeug1 = make_unique<Fahrzeug>("fahrzeug1", 200.3);
+	Fahrrad* fahrrad1 = new Fahrrad("fahrrad1", 25.3);
+	Fahrrad* fahrrad2 = new Fahrrad("fahrrad2", 22.9);
+	PKW pkw1("pkw1", 159.3, 8.3, 44.9);
+	PKW pkw2("pkw2", 100.5, 8, 32.5);
+	Fahrzeug* fahrzeug2 = new Fahrzeug("fahrzeug2", 88.3);
+
+	// Gibt die Eigenschaften dieser Objekte aufm Bildschrim aus.
+	Fahrzeug::vKopf();
+	cout << *fahrzeug1 << endl << endl;
+	cout << *fahrrad1 << endl;
+	cout << *fahrrad2 << endl;
+	cout << pkw1 << endl;
+	cout << pkw2 << endl;
+	cout << *fahrzeug2 << endl << endl;
+
+	// Set die Gesamtstrecke von zwei PKWs, um das Verhealtnis des ueberladenden operator< beobachten zu koennen.
+	pkw1.setGesamtstrecke(100);
+	pkw2.setGesamtstrecke(200);
+
+	// Gibt die Eigenschaften dieser Objekte aufm Bildschrim aus.
+	Fahrzeug::vKopf();
+	cout << *fahrzeug1 << endl << endl;
+	cout << *fahrrad1 << endl;
+	cout << *fahrrad2 << endl;
+	cout << pkw1 << endl;
+	cout << pkw2 << endl;
+	cout << *fahrzeug2 << endl << endl;
+
+	// Beachte der operator<
+	if(pkw1 < pkw2){
+		cout << "\nGesamtstrecke von pkw1: " << pkw1.getGesamtstrecke() << endl;
+		cout << "GesamStstrecke von pkw2: " << pkw2.getGesamtstrecke() << endl;
+		cout << "Bedingung war pkw1 < pkw2. Die Bedingung wurde erfuellt und diese Zeile ist im If-Block\n" << endl;
+	}
+
+	// Beachte der operator=
+	// Da pkw1 und pkw1 Objekte sind, koennen die alle Eigenschaften außer ID uebertragen werden.
+	cout << "Operation: pkw1=pkw2" << endl << endl;
+	pkw1 = pkw2;
+
+	cout << "Adresse von pkw1: " << &pkw1 << endl;
+	cout << "Adresse von pkw2: " << &pkw2 << endl;
+
+
+	// Gibt die Eigenschaften dieser Objekte aufm Bildschrim aus.
+	Fahrzeug::vKopf();
+	cout << *fahrzeug1 << endl << endl;
+	cout << *fahrrad1 << endl;
+	cout << *fahrrad2 << endl;
+	cout << pkw1 << endl;
+	cout << pkw2 << endl;
+	cout << *fahrzeug2 << endl << endl;
+
+	// Da die Fahrraeder Pointers sind, kann die uebertragung der IDs nicht vermieden werden.
+	cout << "Operation: fahrrad1=fahrrad2\n" << endl;
+	fahrrad1 = fahrrad2;
+
+	cout << fahrrad1 << endl;
+	cout << fahrrad2 << endl;
+
+	// Gibt die Eigenschaften dieser Objekte aufm Bildschrim aus.
+	Fahrzeug::vKopf();
+	cout << *fahrzeug1 << endl << endl;
+	cout << *fahrrad1 << endl;
+	cout << *fahrrad2 << endl;
+	cout << pkw1 << endl;
+	cout << pkw2 << endl;
+	cout << *fahrzeug2 << endl << endl;
+
+	// Loeschen der dynamischen Objekte(Pointers, um von der undefinierten Verhealtnissen vermeiden zu koennen.)
+	delete fahrrad1;
+	delete fahrrad2;
+	delete fahrzeug2;
 }
