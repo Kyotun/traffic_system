@@ -40,6 +40,7 @@ void vAufgabe_AB1();
 void vAufgabe_4();
 void vAufgabe_5();
 void vAufgabe_6();
+void vAufgabe_6a();
 
 int main(){
 	// vAufgabe_1();
@@ -50,6 +51,7 @@ int main(){
     // vAufgabe_4();
     // vAufgabe_5();
     // vAufgabe_6();
+    // vAufgabe_6a();
 	return 0;
 }
 
@@ -544,4 +546,80 @@ void vAufgabe_6(){
 		vSleep(500);
 	}
 	vBeendeGrafik();
+}
+
+void vAufgabe_6a(){
+
+	// Wir moechten namespace vertagt benutzen, da alle Angaben unter diesem Name definiert wurden.
+	using namespace vertagt;
+
+	// Erstellen eine Liste vom Typ VListe
+	VListe<int> VListe;
+
+	// Zur Erstellung einer zufaelligen Zahl
+	static std::mt19937 device(0);
+	std::uniform_int_distribution<int> dist(1, 10);
+
+	// Zahlen in die Liste eingeben.
+	cout << "Zahlen werden in die Liste eingetragen.:\n\n";
+	for(int i = 1; i < 10; i++){
+		VListe.push_back(dist(device));
+	}
+
+	// Zahlen ausgeben
+	cout << "Liste vor dem Aktualisieren:\n";
+	for(auto it = VListe.begin(); it != VListe.end(); it++) {
+		std::cout << (*it) << " ";
+	}
+
+	// Liste soll aktualisiert wernde, sonst konnten die Zahlen in die Liste nicht rein.
+	cout << "\nListe wurde aktualisiert.\n\n";
+	VListe.vAktualisieren();
+
+	// Ausgeben nach dem Aktualisieren, soll sich gaeendert worden sein.
+	cout << "Liste nach dem aktualiseren:\n";
+	for(auto it = VListe.begin(); it != VListe.end(); it++) {
+		std::cout << (*it) << " ";
+	}
+
+	// Loeschen der Elementen grosser als 5 sind.
+	for(auto it = VListe.begin(); it != VListe.end(); it++) {
+		if((*it) > 5) {
+			VListe.erase(it);
+		}
+	}
+
+	cout << "\n\nElemente grßer als 5 wurden gelscht aber nicht aktualisiert..\n";
+	cout << "Liste:\n";
+	// Ausgabe sollte die gleiche sein, da vAktualisieren noch nicht durchgefuehrt wurde
+	for(auto it = VListe.begin(); it != VListe.end(); it++) {
+		std::cout << (*it) << " ";
+	}
+
+	VListe.vAktualisieren();
+
+	cout << "\n\nListe wurde aktualisiert. Liste:\n";
+	// Ausgeben nach dem Aktualisieren, soll sich gaeendert worden sein.
+	for(auto it = VListe.begin(); it != VListe.end(); it++) {
+		cout << (*it) << " ";
+	}
+
+	// Eingeben in die Liste zwei mehr zufaellige Zahlen
+	VListe.push_back(dist(device));
+	VListe.push_front(dist(device));
+
+	cout << "\n\nEine Zahl vorne und eine Zahl hinter werden hinzugefuegt.\n";
+	cout << "Vor dem aktualiseren:\n";
+	for(auto it = VListe.begin(); it != VListe.end(); it++) {
+		cout << (*it) << " ";
+	}
+
+	// Liste soll aktualisiert werden.
+	VListe.vAktualisieren();
+
+	cout << "\n\nNach dem aktualisieren. Liste:\n";
+	// Ausgabe sollte sich geaendert haben
+	for(auto it = VListe.begin(); it != VListe.end(); it++) {
+		std::cout << (*it) << " ";
+	}
 }
