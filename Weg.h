@@ -36,6 +36,7 @@ public:
 	// Setters
     void setTempolimiti(int iTempolimit);
     void setFahrzeug(unique_ptr<Fahrzeug> fahrzeug);
+    void setFahrzeugList(list<unique_ptr<Fahrzeug>> fahrzeugList);
 	void setLaenge(double dLaenge){this->p_dLaenge = dLaenge;}
 	void setRueckweg(weak_ptr<Weg> pRueckweg){this->p_pRueckweg = pRueckweg;}
 	void setUeberholverbot(bool bUeberholverbot){this->p_bUeberholverbot = bUeberholverbot;}

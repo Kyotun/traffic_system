@@ -100,3 +100,11 @@ void Weg::setFahrzeug(unique_ptr<Fahrzeug> fahrzeug){
 	p_pFahrzeuge.push_back(std::move(fahrzeug));
 	p_pFahrzeuge.vAktualisieren();
 }
+
+// Die uebergebene Liste wird nach der aktuelle Fahrzeugliste p_pFahrzeuge hinzugefuegt.
+void Weg::setFahrzeugList(list<unique_ptr<Fahrzeug>> fahrzeugList){
+	for(auto&& fahrzeugPtr : fahrzeugList){
+		p_pFahrzeuge.push_back(std::move(fahrzeugPtr));
+		p_pFahrzeuge.vAktualisieren();
+	}
+}
