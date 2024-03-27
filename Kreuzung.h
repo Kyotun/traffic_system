@@ -35,6 +35,9 @@ public:
 		}
 	}
 
+    // PTR Funktionen
+	shared_ptr<Weg>pZufaelligerWeg(Weg& weg);
+
 protected:
 private:
 	// das Volumen, das einer Kreuzung zum Auftanken zur Verfugung steht
