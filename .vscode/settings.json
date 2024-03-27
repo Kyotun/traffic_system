@@ -5,6 +5,7 @@
         "list": "cpp",
         "stdexcept": "cpp",
         "system_error": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "ios": "cpp"
     }
 }

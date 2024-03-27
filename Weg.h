@@ -48,6 +48,7 @@ public:
 
     // Voids
 	void vSimulieren() override;
+    void vAusgeben() const override;
 
 protected:
 private:

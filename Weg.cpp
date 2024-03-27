@@ -144,3 +144,14 @@ void Weg::vSimulieren(){
 	}
 	p_pFahrzeuge.vAktualisieren();
 }
+
+// Ausgeben der Daten der Wegobjekte
+void Weg::vAusgeben() const{
+	Simulationsobjekt::vAusgeben();
+	cout << resetiosflags(ios::adjustfield)
+		 << setiosflags(ios::left)
+		 << setw(10) << ": " << getLaenge()
+		 << setw(10) << "( ";
+			getFahrzeuge();
+	cout << ")";
+}
