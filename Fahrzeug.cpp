@@ -153,7 +153,3 @@ Fahrzeug& Fahrzeug::operator=(const Fahrzeug& other) {
 
 	return *this;
 }
-
-void Fahrrad::vEinlesen(istream& is){
-	Fahrzeug::vEinlesen(is);
-}
