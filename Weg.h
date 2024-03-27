@@ -52,6 +52,7 @@ public:
     void vAusgeben(ostream& ausgabes) const override;
     void static vKopf();
     void vAnnahme(unique_ptr<Fahrzeug> fahrzeug);
+    void vAnnahme(unique_ptr<Fahrzeug>, double dStartZeitpunkt);
 
 protected:
 private:

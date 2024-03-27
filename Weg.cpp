@@ -186,3 +186,10 @@ void Weg::vAnnahme(unique_ptr<Fahrzeug>fahrzeug){
 	p_pFahrzeuge.push_back(std::move(fahrzeug));
 	p_pFahrzeuge.vAktualisieren();
 }
+
+// Uebergebene Fahrzeug wird als parkend bis zur StartZeitpunkt in der Liste p_pFahrzeuge gesetzt.
+void Weg::vAnnahme(unique_ptr<Fahrzeug>fahrzeug, double dStartZeitpunkt){
+	fahrzeug->vNeueStrecke(*this, dStartZeitpunkt);
+	p_pFahrzeuge.push_front(std::move(fahrzeug));
+	p_pFahrzeuge.vAktualisieren();
+}
