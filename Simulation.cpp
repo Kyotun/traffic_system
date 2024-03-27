@@ -4,10 +4,8 @@
 #include <map>
 #include <sstream>
 
-#include "Fahrrad.h"
 #include "Fahrzeug.h"
 #include "Kreuzung.h"
-#include "PKW.h"
 #include "Simulation.h"
 #include "SimuClient.h"
 #include "Tempolimit.h"
@@ -16,6 +14,11 @@
 using namespace std;
 extern double dGlobaleZeit;
 
+shared_ptr<Kreuzung> Simulation::getKreuzung(const string& name) {
+	vCheckKreuzung(name);
+    auto it = kreuzungenMap.find(name);
+    return it->second;
+}
 
 // Kontrolliere, ob der gegebene Name nicht im Map ist.
 void Simulation::vCheckKreuzung(const string& name){

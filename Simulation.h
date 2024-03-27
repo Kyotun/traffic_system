@@ -14,6 +14,9 @@ using namespace std;
 class Simulation{
 public:
 
+    // Getters
+	shared_ptr<Kreuzung> getKreuzung(const string& name);
+
     // Voids
     void vCheckKreuzung(const string& name);
 	void vCheckDoppelKreuzung(const string& name);
