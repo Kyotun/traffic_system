@@ -73,5 +73,27 @@ namespace vertagt
 			return p_objekte.empty();
 		}
 
+        // Schreibfunktionen
+		void push_back(T obj)
+		{
+			// Aktionselement fuer PushBack auf Liste erzeugen
+			p_aktionen.push_back(make_unique<VPushBack<T>>(p_objekte, std::move(obj)));
+
+		}
+
+		void push_front(T obj)
+		{
+			// Aktionselement fuer PushBack auf Liste erzeugen
+			p_aktionen.push_back(make_unique<VPushFront<T>>(p_objekte, std::move(obj)));
+
+		}
+
+		void erase(iterator it)
+		{
+			// Aktionselement fuer PushBack auf Liste erzeugen (hier Iterator statt Objekt !)
+			p_aktionen.push_back(make_unique<VErase<T>>(p_objekte,it));
+		}
+
+
 	};
 } // namespace vertagt
