@@ -42,6 +42,7 @@ void vAufgabe_5();
 void vAufgabe_6();
 void vAufgabe_6a();
 void vAufgabe_6b();
+void vAufgabe_7();
 
 int main(){
 	// vAufgabe_1();
@@ -54,6 +55,7 @@ int main(){
     // vAufgabe_6();
     // vAufgabe_6a();
     // vAufgabe_6b();
+    // vAufgabe_7();
 	return 0;
 }
 
@@ -692,3 +694,95 @@ void vAufgabe_6a(){
 //		innerort->vSimulieren();
 //	}
 //}
+
+void vAufgabe_7(){
+	double dStunden = 0.0;
+	// Lese die gewuenschte Simulationzeit ein.(Benutzerfreundlciher)
+	cout << "Bitte geben Sie die Simulationzeit in Stunden ein: ";
+	cin >> dStunden;
+
+	double dEpsilon = 0.0;
+	// Einlesen der Zeittakt vom Benutzer.
+	cout << endl << "Bitte geben Sie eine Period fuer die Simulation(lieber als Bruchteile von Studen): ";
+	cin >> dEpsilon;
+
+	// Erzeuge Kreuzungen und deren Strasse
+	shared_ptr<Kreuzung> Kr1 = make_shared<Kreuzung>("Kr1");
+	shared_ptr<Kreuzung> Kr2 = make_shared<Kreuzung>("Kr2", 1000);
+	shared_ptr<Kreuzung> Kr3 = make_shared<Kreuzung>("Kr3", 0);
+	shared_ptr<Kreuzung> Kr4 = make_shared<Kreuzung>("Kr4", 0);
+
+	// Verbinde die Kreuzungen mit den Wegen
+	Kreuzung::vVerbinde("W12", "W21", 40, Kr1, Kr2, Innerorts, false);
+	Kreuzung::vVerbinde("W23a", "W32a", 115, Kr2, Kr3, Autobahn, true);
+	Kreuzung::vVerbinde("W23b", "W32b", 40, Kr2, Kr3, Innerorts, false);
+	Kreuzung::vVerbinde("W24", "W42", 55, Kr2, Kr4, Innerorts, false);
+	Kreuzung::vVerbinde("W34", "W43", 85, Kr3, Kr4, Autobahn, true);
+	Kreuzung::vVerbinde("W44a", "W44b", 130, Kr4, Kr4, Landstrasse, true);
+
+	// Erzeuge Fahrzeuge
+	unique_ptr<PKW> pkw1 = make_unique<PKW>("pkw1", 47.83, 11.27);
+	unique_ptr<PKW> pkw2 = make_unique<PKW>("pkw2", 35.24, 15.88, 67.73);
+	unique_ptr<Fahrrad> fahrrad1 = make_unique<Fahrrad>("fahrrad1", 21.34);
+	unique_ptr<Fahrrad> fahrrad2 = make_unique<Fahrrad>("fahrrad2", 27.25);
+
+	// KR1 nimmt alle Fahrzeuge an
+	Kr1->vAnnahme(std::move(pkw1),1);
+	Kr1->vAnnahme(std::move(pkw2),0.75);
+	Kr1->vAnnahme(std::move(fahrrad1),0.25);
+	Kr1->vAnnahme(std::move(fahrrad2),0.5);
+
+	// Erzeuge eine Liste/Vektor dann zieht alle Kreuzungen in diese Liste um.
+	vector<shared_ptr<Kreuzung>>kreuzungen;
+	kreuzungen.push_back(Kr1);
+	kreuzungen.push_back(Kr2);
+	kreuzungen.push_back(Kr3);
+	kreuzungen.push_back(Kr4);
+
+	// Initsialisiere Grafik
+	bInitialisiereGrafik(1000, 1000);
+
+
+	// Zeichne Kreuzungen
+	bZeichneKreuzung(680, 40);
+	bZeichneKreuzung(680, 300);
+	bZeichneKreuzung(680, 570);
+	bZeichneKreuzung(320, 300);
+
+	// Zeichne Strassen
+	// Strasse 1
+	int kS1[] = {680, 40, 680, 300};
+	bZeichneStrasse("W12", "W21", 40, 2, kS1);
+
+	// Strasse 2
+	int kS2[] = {680, 300, 850, 300, 970, 390, 970, 500, 850, 570, 680, 570};
+	bZeichneStrasse("W23a", "W32a", 115, 6, kS2);
+
+	// Strasse 3
+	int kS3[] = {680, 300, 680, 570};
+	bZeichneStrasse("W23b", "W32b", 40, 2, kS3);
+
+	// Strasse 4
+	int kS4[] = {680, 300, 320, 300};
+	bZeichneStrasse("W24", "W42", 55, 2, kS4);
+
+	// Strasse 5
+	int kS5[] = {680, 570, 500, 570, 350, 510, 320, 420, 320, 300};
+	bZeichneStrasse("W34", "W43", 85, 5, kS5);
+
+	// Strasse 6
+	int kS6[] = {320, 300, 320, 150, 200, 60, 80, 90, 70, 250, 170, 300, 320, 300};
+	bZeichneStrasse("W44a", "W44b", 130, 7, kS6);
+
+	// Simuliere alle Kreuzungen in dieser Liste in einer For-loop bis ende der gegebenen Zeit.
+	Fahrzeug::vKopf();
+	for(dGlobaleZeit = dEpsilon; dGlobaleZeit < dStunden; dGlobaleZeit += dEpsilon){
+		vSetzeZeit(dGlobaleZeit);
+		for(const auto& kreuzung : kreuzungen){
+			kreuzung->vSimulieren();
+		}
+		vSleep(500);
+	}
+	vBeendeGrafik();
+
+}
