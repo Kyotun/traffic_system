@@ -167,3 +167,16 @@ void Weg::vAusgeben(ostream& ausgabe) const{
 			getFahrzeuge();
 	ausgabe << ")";
 }
+
+// Klassenmethode vKopf, fuer tabellaerische Ausgabe wird diese Methode benutzt.
+void Weg::vKopf() {
+	cout << endl << resetiosflags(ios::adjustfield)
+		 << setiosflags(ios::left)
+		 << setw(8) << "ID"
+		 << setw(15) << "| Name"
+		 << setw(15) << "| Laenge"
+		 << setw(15) << "| Fahrzeuge" << endl;
+
+	cout << setw(8+15*3) << setfill('-') << '-' << setfill(' ') << endl;
+
+}

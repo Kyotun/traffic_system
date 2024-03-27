@@ -50,6 +50,7 @@ public:
 	void vSimulieren() override;
     void vAusgeben() const override;
     void vAusgeben(ostream& ausgabes) const override;
+    void static vKopf();
 
 protected:
 private:
