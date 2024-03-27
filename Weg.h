@@ -27,6 +27,7 @@ public:
     Tempolimit gettTempolimit() const;
     void getFahrzeuge() const;
     shared_ptr<Weg> getRueckweg();
+    shared_ptr<Kreuzung> getKreuzung() const;
 	double getLaenge() const{return p_dLaenge;}
 	double getSchranke()const{return this->p_dSchranke;}
 	VListe<unique_ptr<Fahrzeug>>* getFahrzeugList(){return &p_pFahrzeuge;}

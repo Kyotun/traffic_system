@@ -70,3 +70,13 @@ shared_ptr<Weg> Weg::getRueckweg(){
 		throw runtime_error("Rueckweg Objekt wurde schon geloescht.");
 	}
 }
+
+// Gibt die Zielkreuzung dieses Wegs zurueck.
+shared_ptr<Kreuzung>Weg::getKreuzung() const{
+	shared_ptr<Kreuzung> sharedPtr = p_pZielkreuzung.lock();
+		if (sharedPtr) {
+			return sharedPtr;
+		} else {
+			throw runtime_error("Kreuzung Objekt wurde schon geloescht.");
+		}
+}
