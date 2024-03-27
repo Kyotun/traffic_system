@@ -40,3 +40,8 @@ double PKW::getGesamtVerbrauch() const{
 	// Zweite Klammer = Gesamtverbrauch in 1 km
 	return (p_dGesamtstrecke)*(p_dVerbrauch/100);
 }
+
+// Gibt den aktuellen Tankinhalt zurueck
+double PKW::getTankinhalt() const{
+	return p_dTankinhalt;
+}
