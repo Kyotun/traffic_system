@@ -31,6 +31,7 @@ public:
 
     // Doubles
 	double dGeschwindigkeit() const override;
+    double dTanken(double dMenge = std::numeric_limits<double>::infinity()) override;
 
 private:
 	// Double Variablen

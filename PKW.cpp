@@ -65,3 +65,23 @@ double PKW::dGeschwindigkeit() const{
 
 	return erlaubte_max_geschwindigkeit;
 }
+
+// Tanken Funktion, die zur Tanken von PKWs dient.
+// Im Laufe der Zeit nimmt der Tankinhalt der PKWs ab,
+// die aber noch wieder gefuellt werden sollen, um weitersimuliert werden zu koennen.
+double PKW::dTanken(double dMenge){
+
+	if(dMenge > p_dTankvolumen){
+		dMenge = p_dTankvolumen;
+		cout << "Der Tankvolumenlimit ist ueberschritten, der Tank ist voll!" << endl;
+	}
+	if(0.0 > dMenge){
+		cout << "Die getankte Menge darf nicht kleiner als 0 sein." << endl;
+		return 0.0;
+	}
+
+	double dTankinhaltVorher = p_dTankinhalt;
+	p_dTankinhalt = dMenge;
+
+	return (p_dTankinhalt - dTankinhaltVorher);
+}
