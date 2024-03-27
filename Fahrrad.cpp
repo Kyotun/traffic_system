@@ -85,3 +85,7 @@ void Fahrrad::vZeichnen(const Weg& weg){
 	double relativePosition = getAbschnittStrecke()/ weg.getLaenge();
 	bZeichneFahrrad(getName(), weg.getName(), relativePosition, dGeschwindigkeit());
 }
+
+void Fahrrad::vEinlesen(istream& is){
+	Fahrzeug::vEinlesen(is);
+}
