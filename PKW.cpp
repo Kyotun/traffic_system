@@ -128,3 +128,8 @@ void PKW::vAusgeben(ostream& ausgabe) const{
 		    << setw(10) << getZeit()
 		    << setw(15) << getGlobaleZeit() << endl;
 }
+
+void PKW::vEinlesen(istream& is){
+	Fahrzeug::vEinlesen(is);
+	is >> p_dVerbrauch >> p_dTankvolumen;
+}

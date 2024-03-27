@@ -37,6 +37,7 @@ public:
 	void vSimulieren() override;
     void vAusgeben()const override;
     void vAusgeben(ostream& ausgabe) const override;
+    void vEinlesen(istream& is) override;
 
 private:
 	// Double Variablen
