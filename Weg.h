@@ -46,6 +46,9 @@ public:
     // Bools
 	bool bIsLetzteFahrzeug(Fahrzeug& fahrzeug_gesucht);
 
+    // Voids
+	void vSimulieren() override;
+
 protected:
 private:
 	double p_dLaenge = 0.0;

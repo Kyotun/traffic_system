@@ -3,6 +3,8 @@
         "iomanip": "cpp",
         "iosfwd": "cpp",
         "list": "cpp",
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "system_error": "cpp",
+        "iostream": "cpp"
     }
 }

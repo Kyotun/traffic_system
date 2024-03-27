@@ -121,3 +121,26 @@ bool Weg::bIsLetzteFahrzeug(Fahrzeug& fahrzeug_gesucht){
 	}
 	return false;
 }
+
+// Simulieren Methode der Klasse Weg.
+void Weg::vSimulieren(){
+
+	p_pFahrzeuge.vAktualisieren();
+
+	// Simuliere alle vorhandene Fahrzeuge in der Liste p_pFahrzeuge
+	// Waehrend des Simuliieren kontrolliere, ob es einen Ausnahme auftritt.
+	// Wenn ja, bearbeite diesen Ausnahme und mache weiter.
+	// Wenn nein, mach einfach weiter.
+	for(auto it = p_pFahrzeuge.begin(); it != p_pFahrzeuge.end();){
+		try{
+			cout << *(*it);
+			(*it)->vZeichnen(*this);
+			(*it)->vSimulieren();
+			it++;
+		}catch (Fahrausnahme *fahrausnahme){
+			it++;
+			fahrausnahme->vBearbeiten();
+		}
+	}
+	p_pFahrzeuge.vAktualisieren();
+}
