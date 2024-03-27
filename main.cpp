@@ -37,6 +37,7 @@ void vAufgabe_1a();
 void vAufgabe_2();
 void vAufgabe_3();
 void vAufgabe_AB1();
+void vAufgabe_4();
 
 int main(){
 	// vAufgabe_1();
@@ -44,6 +45,7 @@ int main(){
     // vAufgabe_2();
     // vAufgabe_3();
     // vAufgabe_AB1();
+    // vAufgabe_4();
 	return 0;
 }
 
@@ -385,4 +387,34 @@ void vAufgabe_AB1() {
    }
    char c;
    std::cin >> c;
+}
+
+void vAufgabe_4(){
+
+	// Statisches erzeugen eines Wegs "Innerorts"
+	Weg weg1("weg1", 105.99, Tempolimit::Innerorts);
+
+	// Dynamisches erzeugen(mit Smart-Ptr) eines wegs "Autobahn"
+	unique_ptr<Weg> weg_ptr = make_unique<Weg>("weg_ptr", 287.34, Autobahn);
+
+	// Dynamisches erzeugen eines Fahrzeugs.
+	unique_ptr<Fahrzeug> fahrzeug1 = make_unique<Fahrzeug>("BMW");
+	unique_ptr<Fahrzeug> fahrzeug2 = make_unique<Fahrzeug>("Audi");
+	unique_ptr<Fahrzeug> fahrzeug3 = make_unique<Fahrzeug>("BMX");
+
+
+	// Weg sollte leer sein.
+	cout << "\nVor dem Annahme:";
+	Weg::vKopf();
+	cout << weg1 << endl;
+	cout << *weg_ptr << endl << endl;
+
+	// Nach diesen Zeilen soll Weg fahrzeug1 enthalten.
+	cout << "Nach dem Annahme von fahrzeug1 im weg1:" << endl;
+	weg1.vAnnahme(std::move(fahrzeug1));
+	weg1.vAnnahme(std::move(fahrzeug2));
+	weg1.vAnnahme(std::move(fahrzeug3));
+	Weg::vKopf();
+	cout << weg1 << endl;
+	cout << *weg_ptr << endl << endl;
 }
