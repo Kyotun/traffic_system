@@ -38,6 +38,11 @@ public:
     // PTR Funktionen
 	shared_ptr<Weg>pZufaelligerWeg(Weg& weg);
 
+    // Void Funktionen
+	static void vVerbinde(string sHinwegName, string sRuckwegName,
+			double dWegLaenge, weak_ptr<Kreuzung> pStartKreuzung,
+			const weak_ptr<Kreuzung> pZielKreuzung, Tempolimit eTempolimit = Tempolimit::Autobahn, bool bUeberholverbot = true);
+
 protected:
 private:
 	// das Volumen, das einer Kreuzung zum Auftanken zur Verfugung steht

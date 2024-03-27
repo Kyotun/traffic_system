@@ -52,3 +52,39 @@ shared_ptr<Weg> Kreuzung::pZufaelligerWeg(Weg& weg){
 	std::advance(it, randomIndex);
 	return *it;
 }
+
+// Verbinde zwei uebergebene Wege zueinander.
+// Einer fuehrt zu der Zielkreuzung -> Hinweg
+// Andere fuehrt zu der Startkreuzung -> Rueckweg
+
+// Achtung ! -> Haengt von der Perspektive ab
+// Lass uns sagen, dass es zwei Kreuzungen gibt -> Kr1, Kr2
+// und zwei Wege gibt -> W1, W2
+// W1, Rueckweg von W2
+// W2, Rueckweg von W1
+// W1 fuehrt aus Kr1
+// W2 fuehrt aus Kr2
+// Weg List der Kr1 enthaelt W1, nicht W2. Denn W1 fuehrt aus Kr1. Kr1 ist die Startkreuzung von W1, Kr2 ist aber die Zielkreuzung von W1.
+// Weg List der Kr2 enthaelt W2, nicht W1. Denn W2 fuehrt aus Kr2. Kr2 ist die Startkreuzung von W2, Kr1 ist aber die Zielkreuzung von W2.
+void Kreuzung::vVerbinde(string sNameHinweg, string sNameRuckweg,
+		double dWegLaenge, weak_ptr<Kreuzung> pStartKreuzung,
+		const weak_ptr<Kreuzung> pZielKreuzung,
+		Tempolimit eTempolimit, bool bUeberholverbot) {
+
+	shared_ptr<Weg> pHinweg = make_shared<Weg>(sNameHinweg,
+			dWegLaenge,
+			pZielKreuzung,
+			eTempolimit,
+			bUeberholverbot);
+	shared_ptr<Weg> pRueckweg = make_shared<Weg>(sNameRuckweg,
+			dWegLaenge,
+			pStartKreuzung,
+			eTempolimit,
+			bUeberholverbot);
+
+	pHinweg->setRueckweg(pRueckweg);
+	pRueckweg->setRueckweg(pHinweg);
+
+	pZielKreuzung.lock()->p_pWege.push_back(pRueckweg);
+	pStartKreuzung.lock()->p_pWege.push_back(pHinweg);
+}
