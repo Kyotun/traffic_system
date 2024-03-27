@@ -20,6 +20,7 @@ public:
 			double p_dVerbrauch, double p_dTankvolumen = 55.0);
 
 	// Getters
+    double getGesamtVerbrauch() const override;
 	double getTankvolumen() const override{return p_dTankvolumen;}
 	double getVerbrauch(){return p_dVerbrauch;}
 

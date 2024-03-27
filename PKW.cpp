@@ -33,3 +33,10 @@ PKW::PKW(string p_sName, double p_dMaxGeschwindigkeit,
 					Fahrzeug(p_sName, p_dMaxGeschwindigkeit),
 					p_dVerbrauch(p_dVerbrauch),
 					p_dTankvolumen(p_dTankvolumen){}
+
+// Rechne den Gesamtverbrauch und gibt es zurueck.
+double PKW::getGesamtVerbrauch() const{
+	// Gesamtstrecke in km erste Klammer
+	// Zweite Klammer = Gesamtverbrauch in 1 km
+	return (p_dGesamtstrecke)*(p_dVerbrauch/100);
+}
