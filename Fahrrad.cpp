@@ -63,3 +63,13 @@ void Fahrrad::vAusgeben() const{
 		 << setw(10) << getZeit()
 		 << setw(15) << getGlobaleZeit() << endl;
 }
+
+// Ausgabefunktion der Klasse Fahrrad, erbt von Fahrzeug und werden einige Fahrradspezifische Eigenschaften addiert.
+// Mit dieser Methode kann das Objekt direkt mit cout<< ausgegeben werden.
+void Fahrrad::vAusgeben(std::ostream& ausgabe) const{
+	Fahrzeug::vAusgeben(ausgabe);
+	ausgabe << setw(20) << "-"
+			<< setw(15) << "-"
+			<< setw(10) << getZeit()
+			<< setw(15) << getGlobaleZeit() << endl;
+}
