@@ -29,6 +29,9 @@ public:
 	void setVerbrauch(double dVerbrauch){this->p_dVerbrauch = dVerbrauch;}
 	void setTankvolumen(double dTankvolumen){this->p_dTankvolumen = dTankvolumen;}
 
+    // Doubles
+	double dGeschwindigkeit() const override;
+
 private:
 	// Double Variablen
 	double p_dVerbrauch = 0.0; // Liter / 100 km
