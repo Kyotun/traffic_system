@@ -44,6 +44,7 @@ public:
 			const weak_ptr<Kreuzung> pZielKreuzung, Tempolimit eTempolimit = Tempolimit::Autobahn, bool bUeberholverbot = true);
     
     void vTanken(Fahrzeug& fahrzeug);
+    void vAnnahme(unique_ptr<Fahrzeug> fahrzeug, double dStartzeit);
 
 protected:
 private:

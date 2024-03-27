@@ -101,3 +101,12 @@ void Kreuzung::vTanken(Fahrzeug& fahrzeug){
 	fahrzeug.dTanken(dBrauchteTank);
 	this->setTankstelleMinus(dBrauchteTank);
 }
+
+// das uebergebene Fahrzeug wird zuerst getankt dann von der Kreuzung angenommen.(als parkend bis Startzeit)
+void Kreuzung::vAnnahme(unique_ptr<Fahrzeug> fahrzeug, double dStartzeit){
+	if(p_pWege.empty()){
+		throw runtime_error("Diese Kreuzung " + getName() + " enthaelt keinen Weg.");
+	}
+	vTanken(*fahrzeug);
+	p_pWege.back()->vAnnahme(std::move(fahrzeug), dStartzeit);
+}
