@@ -39,6 +39,7 @@ void vAufgabe_3();
 void vAufgabe_AB1();
 void vAufgabe_4();
 void vAufgabe_5();
+void vAufgabe_6();
 
 int main(){
 	// vAufgabe_1();
@@ -48,6 +49,7 @@ int main(){
     // vAufgabe_AB1();
     // vAufgabe_4();
     // vAufgabe_5();
+    // vAufgabe_6();
 	return 0;
 }
 
@@ -462,4 +464,84 @@ void vAufgabe_5(){
 		}
 		weg_ptr1->vSimulieren();
 	}
+}
+
+// Mit grafische Ausgabe, neue Aufgabe6
+void vAufgabe_6(){
+
+	//Dynamisches Erzeugen der Elementen
+	unique_ptr<Weg> autobahn = make_unique<Weg>("Autobahn", 500.0);
+	unique_ptr<Weg> innerort = make_unique<Weg>("Innerort", 500.0, Innerorts);
+
+	unique_ptr<PKW> pkw1 = make_unique<PKW>("PKW1_AB", 123.35, 13.37);
+	unique_ptr<PKW> pkw2 = make_unique<PKW>("PKW2_AB", 155.37, 15.55, 62.37);
+	unique_ptr<PKW> pkw3 = make_unique<PKW>("PKW3_IN", 133.39, 12.22);
+	unique_ptr<PKW> pkw4 = make_unique<PKW>("PKW4_IN", 188.32, 16.37);
+
+	unique_ptr<Fahrrad> fahrrad1 = make_unique<Fahrrad>("Fahrrad1_AB", 30.33);
+	unique_ptr<Fahrrad> fahrrad2 = make_unique<Fahrrad>("Fahrrad2_IN", 25.35);
+
+	// Intialisierung der Grafik auf dem SimuServer
+	bInitialisiereGrafik(800, 500);
+
+	// Setzen der Koordinaten fuer die Straße, gerade Linie
+	int koordinaten[4] = { 700, 250, 100, 250 };
+
+	// Zeichnen der Straße
+	bZeichneStrasse(autobahn->getName(), innerort->getName(), autobahn->getLaenge(), 2, koordinaten);
+
+
+	//Annehmen der Fahrzeuge in die Wege.
+	cout << endl;
+	// Zum beobachten des Ueberholverbot, die kleinste Geschwindigkeit soll als erstes angenommen werden.
+	// Auf dem Autobahn kann man Ueberholverbot beobachten.
+	autobahn->vAnnahme(std::move(fahrrad1));
+	autobahn->vAnnahme(std::move(pkw1));
+	autobahn->vAnnahme(std::move(pkw2),2);
+
+	// Hier kann man nur zwischen pk4 und fahrrad2 das Ueberholverbot beobachten.
+	innerort->vAnnahme(std::move(pkw3));
+	innerort->vAnnahme(std::move(pkw4),1.5);
+	innerort->vAnnahme(std::move(fahrrad2));
+
+
+
+	// In jeder x.x Stunden werden die Taenke der PKWs aufgefuellt.
+	double dTankZeit = 0.0;
+	cout << endl << "Bitte geben Sie eine Period fuer Tanken der PKWs: ";
+	cin >> dTankZeit;
+
+	// Wie lange eine Simulationsschritt dauert? -> dEpsilon
+	double dEpsilon = 0.0; // Zeittakt.
+	cout << endl << "Bitte geben Sie eine Period fuer die Simulation(lieber als Bruchteile von Studen): ";
+	cin >> dEpsilon;
+
+	// Gibt die Eigenschaften der Objekte aufm Bildschrim formatiert aus.
+	Fahrzeug::vKopf();
+	for(dGlobaleZeit = dEpsilon; dGlobaleZeit < 4; dGlobaleZeit += dEpsilon){
+
+		// Kontrolliere die Fahrzeuge fuer Tanken, die aufm Autobahn fahren.
+		for(const auto& fahrzeug : *autobahn->getFahrzeugList()){
+			//Kontrolliere ob die TankZeit gekommen ist.
+			if(fmod(dGlobaleZeit,dTankZeit) < dEpsilon){
+				fahrzeug->dTanken(fahrzeug->getTankvolumen());
+			}
+		}
+
+		// Kontrolliere die Fahrzeuge fuer Tanken, die aufm Innerorts fahren.
+		for(const auto& fahrzeug : *innerort->getFahrzeugList()){
+			//Kontrolliere ob die TankZeit gekommen ist.
+			if(fmod(dGlobaleZeit,dTankZeit) < dEpsilon){
+				fahrzeug->dTanken(fahrzeug->getTankvolumen());
+			}
+		}
+
+		// Als erstes werden die Fahrzeuge ausgegeben, die aufm Autobahn fahren.
+		autobahn->vSimulieren();
+		cout << endl;
+		innerort->vSimulieren();
+		cout << endl;
+		vSleep(500);
+	}
+	vBeendeGrafik();
 }
