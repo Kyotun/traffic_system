@@ -54,6 +54,9 @@ public:
     void vAnnahme(unique_ptr<Fahrzeug> fahrzeug);
     void vAnnahme(unique_ptr<Fahrzeug>, double dStartZeitpunkt);
 
+    // Pointers
+	unique_ptr<Fahrzeug> pAbgabe(Fahrzeug& fahrzeug_gesucht);
+
 protected:
 private:
 	double p_dLaenge = 0.0;

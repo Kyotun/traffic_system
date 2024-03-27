@@ -193,3 +193,21 @@ void Weg::vAnnahme(unique_ptr<Fahrzeug>fahrzeug, double dStartZeitpunkt){
 	p_pFahrzeuge.push_front(std::move(fahrzeug));
 	p_pFahrzeuge.vAktualisieren();
 }
+
+// Wenn das uebergebene Fahrzeug in der Fahrzeugliste dieses Wegs ist,
+// wird es geloescht und geloeschtes Fahrzeug wird zurueckgegeben.
+// Wenn es nicht in der Liste ist, wird nullptr zurueckgegeben.
+unique_ptr<Fahrzeug> Weg::pAbgabe(Fahrzeug& fahrzeug_gesucht){
+	for(auto it = p_pFahrzeuge.begin(); it != p_pFahrzeuge.end(); it++) {
+		// ueberpruefen des Iterationselementes mit gewuenschtem Fahrzeug
+		if((*it).get() == &fahrzeug_gesucht) {
+			// Lokale Variable zur Zwischenspeicherung
+			unique_ptr<Fahrzeug> lokal_fahrzeug = std::move(*it);
+			// Loeschen des Fahrzeugs aus der Liste
+			p_pFahrzeuge.erase(it);
+			p_pFahrzeuge.vAktualisieren();
+			return lokal_fahrzeug;
+		}
+	}
+	return nullptr;
+}
