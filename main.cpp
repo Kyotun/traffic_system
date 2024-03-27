@@ -33,9 +33,11 @@ using namespace std;
 double dGlobaleZeit = 0.0;
 
 void vAufgabe_1();
+void vAufgabe_1a();
 
 int main(){
 	// vAufgabe_1();
+    // vAufgabe_1a();
 	return 0;
 }
 
@@ -128,4 +130,50 @@ void vAufgabe_1(){
 	vectorSharedFahrzeuge.push_back(std::move(fahrzeug5));
 	cout << "Unique-Ptr wird in Shared-Vektor verschoben." << endl << endl;
 	vectorSharedFahrzeuge.clear();
+}
+
+void vAufgabe_1a(){
+
+	double dStunden = 0.0;
+	// Lese die gewuenschte Simulationzeit ein.(Benutzerfreundlciher)
+	cout << "Bitte geben Sie die Simulationzeit in Stunden ein: ";
+	cin >> dStunden;
+	double dMaxGeschwindigkeit = 0.0;
+	string sName;
+
+
+	// Lass Benutzer Eigenschaften der 3 Objekte eingeben.
+	// Erzeuge die Objekte(im Smart-Pointer Format) nach den gegebenen Eigenschaften.
+	cout << "Geben Sie bitte den Namen und MaxGeschwindigkeit des erstes Fahrzeuges:" << endl;
+	cin >> sName >> dMaxGeschwindigkeit;
+	unique_ptr<Fahrzeug> fahrzeug1 = make_unique<Fahrzeug>(sName,dMaxGeschwindigkeit);
+
+	cout << "Geben Sie bitte den Namen und MaxGeschwindigkeit des zweites Fahrzeuges" << endl;
+	cin >> sName >> dMaxGeschwindigkeit;
+	unique_ptr<Fahrzeug> fahrzeug2 = make_unique<Fahrzeug>(sName,dMaxGeschwindigkeit);
+
+	cout << "Geben Sie bitte den Namen und MaxGeschwindigkeit des drittes Fahrzeuges" << endl;
+	cin >> sName >> dMaxGeschwindigkeit;
+	unique_ptr<Fahrzeug> fahrzeug3 = make_unique<Fahrzeug>(sName,dMaxGeschwindigkeit);
+
+	// Speichere diese Objekte, die von der Smart-Pointern gezeigt werden, in einer Unique Vektor
+	// Da die Unique Pointers in einer Unique-Vektor gespeichert werden duerfen.
+	vector<unique_ptr<Fahrzeug>>fahrzeuge;
+	fahrzeuge.push_back(std::move(fahrzeug1));
+	fahrzeuge.push_back(std::move(fahrzeug2));
+	fahrzeuge.push_back(std::move(fahrzeug3));
+
+	double dEpsilon = 0.0;
+	// Einlesen der Zeittakt vom Benutzer.
+	cout << endl << "Bitte geben Sie eine Period fuer die Simulation(lieber als Bruchteile von Studen): ";
+	cin >> dEpsilon;
+
+	// Simuliere diese Objekte und gibt die Eigenschaften dieser Objekte in jeder Zeittakt aufm Bildschirm aus.
+	Fahrzeug::vKopf();
+	for(dGlobaleZeit = dEpsilon; dGlobaleZeit < dStunden; dGlobaleZeit += dEpsilon){
+		for(const auto& fahrzeug: fahrzeuge){
+			cout << *fahrzeug << endl;
+			fahrzeug->vSimulieren();
+		}
+	}
 }
