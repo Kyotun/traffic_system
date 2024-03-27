@@ -41,6 +41,7 @@ void vAufgabe_4();
 void vAufgabe_5();
 void vAufgabe_6();
 void vAufgabe_6a();
+void vAufgabe_6b();
 
 int main(){
 	// vAufgabe_1();
@@ -52,6 +53,7 @@ int main(){
     // vAufgabe_5();
     // vAufgabe_6();
     // vAufgabe_6a();
+    // vAufgabe_6b();
 	return 0;
 }
 
@@ -623,3 +625,70 @@ void vAufgabe_6a(){
 		std::cout << (*it) << " ";
 	}
 }
+
+// Ohne grafische Ausgabe, altaere Aufgabe6
+//void vAufgabe_6b(){
+//
+//	// Dynamisches Erzeugen aller Objekte.
+//	unique_ptr<Weg> autobahn = make_unique<Weg>("Autobahn", 250);
+//	unique_ptr<Weg> innerort = make_unique<Weg>("Innerort", 250, Innerorts);
+//
+//	unique_ptr<Fahrzeug> fahrzeug = make_unique<PKW>("PKW1", 123.35, 13.37);
+//	unique_ptr<Fahrzeug> fahrzeug2 = make_unique<PKW>("PKW2", 155.37, 15.55, 62.37);
+//	unique_ptr<Fahrzeug> fahrzeug3 = make_unique<PKW>("PKW3", 133.39, 12.22);
+//	unique_ptr<Fahrzeug> fahrzeug4 = make_unique<PKW>("PKW4", 188.32, 16.37);
+//
+//	unique_ptr<Fahrzeug> fahrzeug5 = make_unique<Fahrrad>("Fahrrad1", 30.33);
+//	unique_ptr<Fahrzeug> fahrzeug6 = make_unique<Fahrrad>("Fahrrad2", 25.35);
+//
+//
+//	// Wege akzeptieren die Fahrzeuge.
+//	cout << endl;
+//	autobahn->vAnnahme(std::move(fahrzeug));
+//	autobahn->vAnnahme(std::move(fahrzeug2),2);
+//	autobahn->vAnnahme(std::move(fahrzeug5));
+//
+//	innerort->vAnnahme(std::move(fahrzeug3));
+//	innerort->vAnnahme(std::move(fahrzeug4),3);
+//	innerort->vAnnahme(std::move(fahrzeug6));
+//
+//
+//
+//	// In jeder x.x Stunden werden die Taenke der PKWs aufgefuellt.
+//	double dTankZeit = 0.0;
+//	cout << endl << "Bitte geben Sie eine Period fuer Tanken der PKWs: ";
+//	cin >> dTankZeit;
+//
+//	// Wie lange eine Simulationsschritt dauert? -> dEpsilon
+//	double dEpsilon = 0.0; // Zeittakt.
+//	cout << endl << "Bitte geben Sie eine Period fuer die Simulation(lieber als Bruchteile von Studen): ";
+//	cin >> dEpsilon;
+//
+//	// Gibt die Eigenschaften der Objekte aufm Bildschrim formatiert aus.
+//	Fahrzeug::vKopf();
+//	for(dGlobaleZeit = dEpsilon; dGlobaleZeit < 5; dGlobaleZeit += dEpsilon){
+//		for(const auto& fahrzeug : *autobahn->getFahrzeugList()){
+//			// Kontrolliere ob die TankZeit gekommen ist.
+//			if(fmod(dGlobaleZeit,dTankZeit) < dEpsilon){
+//				fahrzeug->dTanken(fahrzeug->getTankvolumen());
+//			}
+//		}
+//		// Simuliere den Weg.
+//		autobahn->vSimulieren();
+//	}
+//	dGlobaleZeit = 0;
+//
+//	// Gibt die Eigenschaften der Objekte aufm Bildschrim formatiert aus.
+//	cout << "\n\nAutobahn wurde Simuliert. Nun wird der Innerort simuliert." << endl;
+//	Fahrzeug::vKopf();
+//	for(dGlobaleZeit = dEpsilon; dGlobaleZeit < 5; dGlobaleZeit += dEpsilon){
+//		for(const auto& fahrzeug : *innerort->getFahrzeugList()){
+//			// Kontrolliere ob die TankZeit gekommen ist.
+//			if(fmod(dGlobaleZeit,dTankZeit) < dEpsilon){
+//				fahrzeug->dTanken(fahrzeug->getTankvolumen());
+//			}
+//		}
+//		// Simuliere den Weg.
+//		innerort->vSimulieren();
+//	}
+//}
