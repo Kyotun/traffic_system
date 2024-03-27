@@ -80,3 +80,17 @@ shared_ptr<Kreuzung>Weg::getKreuzung() const{
 			throw runtime_error("Kreuzung Objekt wurde schon geloescht.");
 		}
 }
+
+void Weg::setTempolimiti(int iTempolimit){
+	switch(iTempolimit){
+		case 1:
+			this->p_eTempolimit = Innerorts;
+			break;
+		case 2:
+			this->p_eTempolimit = Landstrasse;
+			break;
+		case 3:
+			this->p_eTempolimit = Autobahn;
+			break;
+	}
+}

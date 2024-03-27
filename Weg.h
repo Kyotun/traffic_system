@@ -34,6 +34,7 @@ public:
 	bool getUeberholverbot()const{return this->p_bUeberholverbot;}
 
 	// Setters
+    void setTempolimiti(int iTempolimit);
 	void setLaenge(double dLaenge){this->p_dLaenge = dLaenge;}
 	void setRueckweg(weak_ptr<Weg> pRueckweg){this->p_pRueckweg = pRueckweg;}
 	void setUeberholverbot(bool bUeberholverbot){this->p_bUeberholverbot = bUeberholverbot;}
