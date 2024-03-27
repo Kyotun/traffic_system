@@ -38,6 +38,7 @@ void vAufgabe_2();
 void vAufgabe_3();
 void vAufgabe_AB1();
 void vAufgabe_4();
+void vAufgabe_5();
 
 int main(){
 	// vAufgabe_1();
@@ -46,6 +47,7 @@ int main(){
     // vAufgabe_3();
     // vAufgabe_AB1();
     // vAufgabe_4();
+    // vAufgabe_5();
 	return 0;
 }
 
@@ -417,4 +419,47 @@ void vAufgabe_4(){
 	Weg::vKopf();
 	cout << weg1 << endl;
 	cout << *weg_ptr << endl << endl;
+}
+
+void vAufgabe_5(){
+
+	// Dynamisches Erzeugen verschiedenen Elementen
+	unique_ptr<Weg> weg_ptr1 = make_unique<Weg>("WEG", 255.55, Innerorts);
+
+	unique_ptr<Fahrzeug> fahrzeug = make_unique<PKW>("PKW1", 123.35, 13.37);
+	unique_ptr<Fahrzeug> fahrzeug2 = make_unique<PKW>("PKW2", 155.37, 15.55, 62.37);
+	unique_ptr<Fahrzeug> fahrzeug3 = make_unique<Fahrrad>("Fahrrad", 27.89);
+	unique_ptr<Fahrzeug> fahrzeug4 = make_unique<PKW>("PKW3", 121.3, 12.33, 34.37);
+
+	// Weg akzeptiert die Fahrzeuge.
+	cout << endl;
+	weg_ptr1->vAnnahme(std::move(fahrzeug));
+	weg_ptr1->vAnnahme(std::move(fahrzeug2));
+	weg_ptr1->vAnnahme(std::move(fahrzeug3));
+	weg_ptr1->vAnnahme(std::move(fahrzeug4),2);
+
+
+
+	// In jeder x.x Stunden werden die Taenke der PKWs aufgefuellt.
+	double dTankZeit = 0.0;
+	cout << endl << "Bitte geben Sie eine Period fuer Tanken der PKWs: ";
+	cin >> dTankZeit;
+
+	// Wie lange eine Simulationsschritt dauert? -> dEpsilon
+	double dEpsilon = 0.0; // Zeittakt.
+	cout << endl << "Bitte geben Sie eine Period fuer die Simulation(lieber als Bruchteile von Studen): ";
+	cin >> dEpsilon;
+
+	// Gibt die Eigenschaften der Objekte aufm Bildschrim formatiert aus.
+	// In jeder Zeittakt, gibt die Informationen der Fahrzeugen vor dem Simulieren aus.
+	// Dann simuliere alle Fahrzeuge.
+	Fahrzeug::vKopf();
+	for(dGlobaleZeit = dEpsilon; dGlobaleZeit < 5; dGlobaleZeit += dEpsilon){
+		for(const auto& fahrzeug : *weg_ptr1->getFahrzeugList()){
+			if(fmod(dGlobaleZeit,dTankZeit) < dEpsilon){
+				fahrzeug->dTanken(fahrzeug->getTankvolumen());
+			}
+		}
+		weg_ptr1->vSimulieren();
+	}
 }
