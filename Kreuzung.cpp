@@ -110,3 +110,16 @@ void Kreuzung::vAnnahme(unique_ptr<Fahrzeug> fahrzeug, double dStartzeit){
 	vTanken(*fahrzeug);
 	p_pWege.back()->vAnnahme(std::move(fahrzeug), dStartzeit);
 }
+
+// Simuliere jeden Weg, der sich zu der Kreuzung verbindet.
+void Kreuzung::vSimulieren(){
+	// Simulieren der Wege an einer Kreuzung
+	if(p_pWege.empty()){
+		throw runtime_error("Diese Kreuzung " + getName() + " enthaelt keinen Weg.");
+	}
+	list<shared_ptr<Weg>>::iterator it;
+
+	for(it = p_pWege.begin(); it != p_pWege.end(); it++) {
+		(*it)->vSimulieren();
+	}
+}
