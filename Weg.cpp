@@ -108,3 +108,16 @@ void Weg::setFahrzeugList(list<unique_ptr<Fahrzeug>> fahrzeugList){
 		p_pFahrzeuge.vAktualisieren();
 	}
 }
+
+// Wenn das uebergebene Fahrzeg das letzte ist, gibt true zurueck. Wenn nicht false.
+bool Weg::bIsLetzteFahrzeug(Fahrzeug& fahrzeug_gesucht){
+	for (auto rit = p_pFahrzeuge.rbegin(); rit != p_pFahrzeuge.rend(); ++rit) {
+		if ((*rit).get() == &fahrzeug_gesucht){
+			return true;
+		}
+		if ( ++rit == p_pFahrzeuge.rend()) {
+			break;
+		}
+	}
+	return false;
+}

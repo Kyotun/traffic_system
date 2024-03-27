@@ -43,6 +43,9 @@ public:
 	void setSchranke(double dSchranke){this->p_dSchranke = dSchranke;}
 	void setTempolimit(Tempolimit eTempolimit){this->p_eTempolimit = eTempolimit;}
 
+    // Bools
+	bool bIsLetzteFahrzeug(Fahrzeug& fahrzeug_gesucht);
+
 protected:
 private:
 	double p_dLaenge = 0.0;
