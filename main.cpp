@@ -44,6 +44,7 @@ void vAufgabe_6a();
 void vAufgabe_6b();
 void vAufgabe_7();
 void vAufgabe_8();
+void vAufgabe_9();
 
 int main(){
 	// vAufgabe_1();
@@ -58,6 +59,7 @@ int main(){
     // vAufgabe_6b();
     // vAufgabe_7();
     // vAufgabe_8();
+    // vAufgabe_9();
 	return 0;
 }
 
@@ -819,4 +821,28 @@ void vAufgabe_8(){
 	} catch(...){
 		cerr << "Unbekannter Fehler." << endl;
 	}
+}
+
+void vAufgabe_9(){
+	double dStunden = 0.0;
+	// Lese die gewuenschte Simulationzeit ein.(Benutzerfreundlciher)
+	cout << "Bitte geben Sie die Simulationzeit in Stunden ein: ";
+	cin >> dStunden;
+
+	double dEpsilon = 0.0;
+	// Einlesen der Zeittakt vom Benutzer.
+	cout << "Bitte geben Sie eine Period fuer die Simulation(lieber als Bruchteile von Studen): ";
+	cin >> dEpsilon;
+
+	// Simulator wird die Dateieingabe einlesen und die Variablen fuer die Objekte einsetzen.
+	// Nachdem der die Variable eingesetzt hat, wird der die Kreuzungen fuer der innerhalb gegebenen Zeit simulieren.
+	// Achtung! -> Bei dieser Aufgabe gibt es keine grafische Ausgabe.
+	Simulation simulator;
+	ifstream inputFile("/Users/kyotun/Desktop/rwth-prinf/Aufgabenblock_3/src/Simu6.dat");
+	if (!inputFile.is_open()) {
+		throw runtime_error("InputFile konnte nicht geoeffnet werden.");
+	}
+	simulator.vEinlesen(inputFile);
+	inputFile.close();
+	simulator.vSimulieren(dStunden, dEpsilon);
 }
