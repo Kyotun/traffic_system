@@ -42,6 +42,8 @@ public:
 	static void vVerbinde(string sHinwegName, string sRuckwegName,
 			double dWegLaenge, weak_ptr<Kreuzung> pStartKreuzung,
 			const weak_ptr<Kreuzung> pZielKreuzung, Tempolimit eTempolimit = Tempolimit::Autobahn, bool bUeberholverbot = true);
+    
+    void vTanken(Fahrzeug& fahrzeug);
 
 protected:
 private:

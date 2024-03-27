@@ -88,3 +88,16 @@ void Kreuzung::vVerbinde(string sNameHinweg, string sNameRuckweg,
 	pZielKreuzung.lock()->p_pWege.push_back(pRueckweg);
 	pStartKreuzung.lock()->p_pWege.push_back(pHinweg);
 }
+
+// Tanken vom uebergebenen Fahrzeug.
+// Wen die Kreuzung keine Kapazitaet hat, darf das Fahrzeug nicht getankt werden.
+void Kreuzung::vTanken(Fahrzeug& fahrzeug){
+	if(this->getTankstelle() <= 0){
+		return;
+	}
+	double dTankvolumen = fahrzeug.getTankvolumen();
+	double dTankinhalt = fahrzeug.getTankinhalt();
+	double dBrauchteTank = dTankvolumen - dTankinhalt;
+	fahrzeug.dTanken(dBrauchteTank);
+	this->setTankstelleMinus(dBrauchteTank);
+}
