@@ -16,4 +16,22 @@ namespace vertagt
 		virtual ~VAktion() = default;
 		virtual void vAusfuehren() = 0;
 	};
+
+    // PushBack
+	template <class T>
+	class VPushBack : public VAktion<T>
+	{
+	private:
+		T p_objekt;
+
+	public:
+		//Es waere sinnlos, um ein Standardkonstruktor zu erzeugen.
+		VPushBack(std::list<T>& liste, T obj) : VAktion<T>(liste), p_objekt(std::move(obj))	{}
+		virtual ~VPushBack() = default;
+		void vAusfuehren() override
+		{
+			VAktion<T>::p_pListe.push_back(std::move(p_objekt));
+		}
+	};
+    
 }  // namespace vertagt
