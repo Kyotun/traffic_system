@@ -73,3 +73,9 @@ void Fahrrad::vAusgeben(std::ostream& ausgabe) const{
 			<< setw(10) << getZeit()
 			<< setw(15) << getGlobaleZeit() << endl;
 }
+
+// Simulationfunktion der Klasse Fahrrad.
+// In jeder Zeittakt soll die aktuelle Geschwindigkeit mit der Funktion dGeschwindigkeit() erneut berechnet werden.
+void Fahrrad::vSimulieren(){
+	Fahrzeug::vSimulieren();
+}

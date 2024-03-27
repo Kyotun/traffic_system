@@ -18,6 +18,7 @@ public:
     // Void&Print
 	void vAusgeben() const override;
     void vAusgeben(ostream& ausgabe) const override;
+    void vSimulieren() override;
 
 private:
 
