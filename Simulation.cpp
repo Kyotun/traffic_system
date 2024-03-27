@@ -16,3 +16,21 @@
 using namespace std;
 extern double dGlobaleZeit;
 
+// Waehlt ein Tempolimit aus, nach der gegebenen integer Zahl.
+Tempolimit Simulation::convertTempolimit(int iTempolimit){
+	switch(iTempolimit){
+		case 1:
+			return Innerorts;
+			break;
+		case 2:
+			return Landstrasse;
+			break;
+		case 3:
+			return Autobahn;
+			break;
+		default:
+			return Autobahn;
+			break;
+	}
+}
+

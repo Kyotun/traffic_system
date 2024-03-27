@@ -14,6 +14,9 @@ using namespace std;
 class Simulation{
 public:
 
+    // Converters
+	Tempolimit convertTempolimit(int iTempolimit);
+
 private:
 	map<string, shared_ptr<Kreuzung>> kreuzungenMap;
 };
