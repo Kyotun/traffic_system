@@ -79,3 +79,9 @@ void Fahrrad::vAusgeben(std::ostream& ausgabe) const{
 void Fahrrad::vSimulieren(){
 	Fahrzeug::vSimulieren();
 }
+
+// Zeichnen Funktion von Fahrrad. Zeichnet den Fahrrad aufm uebergegebenen Weg nach der relativen Position.
+void Fahrrad::vZeichnen(const Weg& weg){
+	double relativePosition = getAbschnittStrecke()/ weg.getLaenge();
+	bZeichneFahrrad(getName(), weg.getName(), relativePosition, dGeschwindigkeit());
+}
