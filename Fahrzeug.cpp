@@ -2,7 +2,10 @@
 #include <iomanip>
 #include <iostream>
 #include <memory>
+
+#include "Fahren.h"
 #include "Fahrzeug.h"
+#include "Parken.h"
 #include "Simulationsobjekt.h"
 #include "Weg.h"
 
