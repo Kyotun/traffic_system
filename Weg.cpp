@@ -60,3 +60,13 @@ void Weg::getFahrzeuge() const{
 		}
 	}
 }
+
+// Gibt den Rueckweg dieses Wegs zurueck.
+shared_ptr<Weg> Weg::getRueckweg(){
+	shared_ptr<Weg> sharedPtr = p_pRueckweg.lock();
+	if (sharedPtr) {
+		return sharedPtr;
+	} else {
+		throw runtime_error("Rueckweg Objekt wurde schon geloescht.");
+	}
+}
