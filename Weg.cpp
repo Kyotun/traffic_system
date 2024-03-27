@@ -94,3 +94,9 @@ void Weg::setTempolimiti(int iTempolimit){
 			break;
 	}
 }
+
+// Setzt das uebergebene Fahrzeug in der Liste p_pFahrzeuge ein.
+void Weg::setFahrzeug(unique_ptr<Fahrzeug> fahrzeug){
+	p_pFahrzeuge.push_back(std::move(fahrzeug));
+	p_pFahrzeuge.vAktualisieren();
+}
