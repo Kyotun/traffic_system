@@ -15,6 +15,7 @@ class Simulation{
 public:
 
     // Voids
+    void vCheckKreuzung(const string& name);
 	void vCheckDoppelKreuzung(const string& name);
 
     // Checkers
