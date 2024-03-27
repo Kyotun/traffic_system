@@ -133,3 +133,8 @@ void PKW::vEinlesen(istream& is){
 	Fahrzeug::vEinlesen(is);
 	is >> p_dVerbrauch >> p_dTankvolumen;
 }
+
+void PKW::vZeichnen(const Weg& weg){
+	double relativePosition = getAbschnittStrecke()/ weg.getLaenge();
+	bZeichnePKW(getName(), weg.getName(), relativePosition, dGeschwindigkeit(), getTankinhalt());
+}

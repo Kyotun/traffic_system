@@ -38,6 +38,7 @@ public:
     void vAusgeben()const override;
     void vAusgeben(ostream& ausgabe) const override;
     void vEinlesen(istream& is) override;
+    void vZeichnen(const Weg& weg) override;
 
 private:
 	// Double Variablen
