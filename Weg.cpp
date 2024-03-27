@@ -48,3 +48,15 @@ Tempolimit Weg::gettTempolimit() const{
 		}
 
 }
+
+// Ausgeben der Namen der Fahrzeuge, die in der Liste p_pFahrzeuge sind.
+void Weg::getFahrzeuge() const{
+	for(auto it = p_pFahrzeuge.begin(); it != p_pFahrzeuge.end(); it++){
+		const Fahrzeug* fahrzeug = it->get();
+		if(it == --p_pFahrzeuge.end()){
+			cout << fahrzeug->getName() << " ";
+		} else{
+			cout << fahrzeug->getName() << ", ";
+		}
+	}
+}
