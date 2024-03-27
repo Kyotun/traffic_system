@@ -22,6 +22,7 @@ public:
 	void vCheckDoppelKreuzung(const string& name);
     void vAddKreuzung(const string& name, shared_ptr<Kreuzung> kreuzung);
     void vAktualisiereKreuzung(const string& name, shared_ptr<Kreuzung> kreuzung);
+    void vSimulieren(double dDauer, double dZeitschritt);
 
     // Checkers
 	void vCheckKreuzungName(string name);

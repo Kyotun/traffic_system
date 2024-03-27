@@ -48,6 +48,18 @@ void Simulation::vAktualisiereKreuzung(const string& name, shared_ptr<Kreuzung> 
 
 }
 
+// Simulieren der Kreuzungen fuer gegebene Dauer und Zeitschritt.
+void Simulation::vSimulieren(double dDauer, double dZeitschritt){
+	Fahrzeug::vKopf();
+	for(dGlobaleZeit = dZeitschritt; dGlobaleZeit < dDauer; dGlobaleZeit += dZeitschritt){
+		vSetzeZeit(dGlobaleZeit);
+		for(auto& pair : kreuzungenMap){
+			pair.second->vSimulieren();
+		}
+		vSleep(1000);
+	}
+}
+
 // Wenn die Laenge des Names der Kreuzung nicht drei ist, gibt eine Ausnahme zurueck.
 void Simulation::vCheckKreuzungName(string name){
 	if(name.length() != 3){
