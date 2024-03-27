@@ -49,6 +49,7 @@ public:
     // Voids
 	void vSimulieren() override;
     void vAusgeben() const override;
+    void vAusgeben(ostream& ausgabes) const override;
 
 protected:
 private:

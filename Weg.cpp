@@ -155,3 +155,15 @@ void Weg::vAusgeben() const{
 			getFahrzeuge();
 	cout << ")";
 }
+
+
+// Ausgeben der Wegobjekte einfach mit cout << (operator<<)
+void Weg::vAusgeben(ostream& ausgabe) const{
+	Simulationsobjekt::vAusgeben(ausgabe);
+	ausgabe << setw(0) << ": "
+			<< setw(15) << getLaenge()
+			<< setw(0) << "( "
+			<< setw(0);
+			getFahrzeuge();
+	ausgabe << ")";
+}
