@@ -39,6 +39,15 @@ void Simulation::vAddKreuzung(const string& name, shared_ptr<Kreuzung> kreuzung)
 	kreuzungenMap[name] = kreuzung;
 }
 
+// Aktualisiert die gegebene Kreuzung.
+// Zuerst loescht die gegebene Kreuzung, dann addiert wieder in die Map.
+void Simulation::vAktualisiereKreuzung(const string& name, shared_ptr<Kreuzung> kreuzung){
+	vCheckKreuzung(name);
+	kreuzungenMap.erase(name);
+	vAddKreuzung(name, kreuzung);
+
+}
+
 // Wenn die Laenge des Names der Kreuzung nicht drei ist, gibt eine Ausnahme zurueck.
 void Simulation::vCheckKreuzungName(string name){
 	if(name.length() != 3){
