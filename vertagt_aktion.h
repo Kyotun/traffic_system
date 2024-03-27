@@ -33,5 +33,20 @@ namespace vertagt
 			VAktion<T>::p_pListe.push_back(std::move(p_objekt));
 		}
 	};
+
+    // PushFront
+	template <class T>
+	class VPushFront : public VAktion<T>
+	{
+	private:
+		T p_objekt;
+	public:
+		VPushFront(std::list<T>& liste, T obj): VAktion<T>(liste), p_objekt(std::move(obj)){}
+		virtual ~VPushFront() = default;
+		void vAusfuehren() override
+		{
+			VAktion<T>::p_pListe.push_front(std::move(p_objekt));
+		}
+	};
     
 }  // namespace vertagt
