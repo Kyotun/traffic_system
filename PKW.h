@@ -35,6 +35,7 @@ public:
 
     // Void&Print Funktionen
 	void vSimulieren() override;
+    void vAusgeben()const override;
 
 private:
 	// Double Variablen

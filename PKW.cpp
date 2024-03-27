@@ -110,3 +110,11 @@ void PKW::vSimulieren() {
 	}
 	p_dTankinhalt = dAktuellTankVolumen;
 }
+
+void PKW::vAusgeben() const {
+	Fahrzeug::vAusgeben();
+	cout << setw(20) << getGesamtVerbrauch()
+		 << setw(15) << getTankinhalt()
+		 << setw(10) << getZeit()
+		 << setw(15) << getGlobaleZeit() << endl;
+}
