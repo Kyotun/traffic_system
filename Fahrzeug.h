@@ -56,6 +56,7 @@ public:
     void vNeueStrecke(Weg& weg);
     void vNeueStrecke(Weg& weg, double dStartZeitpunkt);
     virtual void vEinlesen(istream& is) override;
+	virtual void vZeichnen(const Weg& weg){}
 
     // Ueberladen der operatoren
 	bool operator<(const Fahrzeug& andere) const;
