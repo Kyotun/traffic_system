@@ -94,6 +94,19 @@ namespace vertagt
 			p_aktionen.push_back(make_unique<VErase<T>>(p_objekte,it));
 		}
 
+        // Aenderungen auf Objektliste uebertragen
+		void vAktualisieren()
+		{
+			// Aenderungen auf Objektliste uebertragen
+			for (auto& pAktion : p_aktionen)
+			{
+				// Aktion ausfuehren
+				pAktion->vAusfuehren();
+			}
+			// Aktionsliste loeschen
+			p_aktionen.clear();
+		}
+
 
 	};
 } // namespace vertagt
