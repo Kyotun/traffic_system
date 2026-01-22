@@ -6,10 +6,11 @@
 class Weg;
 class Fahrzeug;
 
-class Streckenende : public Fahrausnahme{
+class Streckenende : public Fahrausnahme
+{
 public:
 	// Konstruktoren
-	Streckenende(Fahrzeug& fahrzeug, Weg& weg): Fahrausnahme(fahrzeug, weg){}
+	Streckenende(Fahrzeug &fahrzeug, Weg &weg) : Fahrausnahme(fahrzeug, weg) {}
 
 	// Voids
 	virtual void vBearbeiten() override;

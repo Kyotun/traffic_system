@@ -11,11 +11,12 @@ extern double dGlobaleZeit;
 
 // Wenn ein Fahrzeug am Ende eines Wegs gefahren ist, wird diese Methode von der Methode des Wegs vSimulieren aufgerufen.
 // Durch try-catch Block.
-void Streckenende::vBearbeiten(){
+void Streckenende::vBearbeiten()
+{
 	// Print den Hinweis, dass das Fahrzeug am Ende des Wegs gekommen ist.
 	cout << "\nDas Fahrzeug " << p_pFahrzeug.getName()
 		 << " ist jetzt am Ende des Wegs " << p_pWeg.getName()
-		 << " im Zeitpunkt " << dGlobaleZeit <<"." << endl;
+		 << " im Zeitpunkt " << dGlobaleZeit << "." << endl;
 
 	// Loescht das Fahrzeug von der Liste des Wegs
 	unique_ptr<Fahrzeug> lokalFahrzeug = p_pWeg.pAbgabe(p_pFahrzeug);

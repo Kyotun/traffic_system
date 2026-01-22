@@ -6,17 +6,17 @@
 class Weg;
 class Fahrzeug;
 
-class Losfahren : public Fahrausnahme{
+class Losfahren : public Fahrausnahme
+{
 public:
 	// Konstruktoren
-	Losfahren(Fahrzeug& fahrzeug, Weg& weg): Fahrausnahme(fahrzeug, weg){}
+	Losfahren(Fahrzeug &fahrzeug, Weg &weg) : Fahrausnahme(fahrzeug, weg) {}
 
 	// Voids
 	void vBearbeiten() override;
 
 protected:
 private:
-
 };
 
 #endif /* LOSFAHREN_H_ */

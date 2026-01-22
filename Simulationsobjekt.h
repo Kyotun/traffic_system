@@ -6,36 +6,37 @@
 
 using namespace std;
 
-class Simulationsobjekt{
+class Simulationsobjekt
+{
 public:
-    // Konstruktoren
-    Simulationsobjekt();
-    Simulationsobjekt(string p_sName);
+	// Konstruktoren
+	Simulationsobjekt();
+	Simulationsobjekt(string p_sName);
 
-    // Verbieten von Copy-Konstruktor
-	Simulationsobjekt(const Simulationsobjekt&) = delete;
+	// Verbieten von Copy-Konstruktor
+	Simulationsobjekt(const Simulationsobjekt &) = delete;
 
 	// Destruktor
 	virtual ~Simulationsobjekt();
 
-    // Getters
-	string getName() const{return p_sName;}
-	double getZeit() const {return p_dZeit;}
-	int getID() const {return p_iID;}
+	// Getters
+	string getName() const { return p_sName; }
+	double getZeit() const { return p_dZeit; }
+	int getID() const { return p_iID; }
 
-    // Setters
-	void setName(string p_sName){this->p_sName = p_sName;}
-	void setZeit(double p_dZeit){this->p_dZeit = p_dZeit;}
+	// Setters
+	void setName(string p_sName) { this->p_sName = p_sName; }
+	void setZeit(double p_dZeit) { this->p_dZeit = p_dZeit; }
 
-    // Voids
+	// Voids
 	virtual void vAusgeben() const;
-    virtual void vAusgeben(ostream& ausgabe) const;
-    virtual void vSimulieren() = 0;
-    virtual void vEinlesen(istream& is);
+	virtual void vAusgeben(ostream &ausgabe) const;
+	virtual void vSimulieren() = 0;
+	virtual void vEinlesen(istream &is);
 
-    // Ueberladen der Operatoren
-	bool operator==(const Simulationsobjekt& andere);
-    Simulationsobjekt& operator=(const Simulationsobjekt& other);
+	// Ueberladen der Operatoren
+	bool operator==(const Simulationsobjekt &andere);
+	Simulationsobjekt &operator=(const Simulationsobjekt &other);
 
 protected:
 	// Strings
@@ -51,7 +52,6 @@ private:
 	// Inline = To be able to initialize
 	// const != cause we want to increment ID value. Cannot assign the const to a const.
 	static inline int p_iMaxID = 0;
-
 };
 
 // Ueberladung von '<<' (Ausgabe) Operator.
@@ -59,10 +59,10 @@ private:
 // nicht erreichen kann.
 // Also keine friend Dekleration.
 // Aber getters werden benötigt, um die private bzw. protected Bereiche erreichen zu können.
-ostream& operator<<(ostream& ausgabe, const Simulationsobjekt& simuobjekt);
+ostream &operator<<(ostream &ausgabe, const Simulationsobjekt &simuobjekt);
 
 // Ueberladung von operator>>(Eingabe Operator)
 // Die Attributen koennen einfach durch die einkommende Eingabe eingesetzt werden.
-istream& operator>>(istream& is, Simulationsobjekt& simuobjekt);
+istream &operator>>(istream &is, Simulationsobjekt &simuobjekt);
 
 #endif /* SIMULATIONSOBJEKT_H_ */

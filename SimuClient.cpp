@@ -18,29 +18,31 @@ using namespace std;
 #define CString std::string
 #define CSocket SimuClientSocket
 
-static CSocket* ClientSocket ;
+static CSocket *ClientSocket;
 static CString InetAddress;
 static CString Port;
 static bool initialized = false;
-static int iXSize=0, iYSize=0;
-static std::map<string,int> sWege;
-//static double dLastTime=-1.0;
-static double dTime=0.0;
+static int iXSize = 0, iYSize = 0;
+static std::map<string, int> sWege;
+// static double dLastTime=-1.0;
+static double dTime = 0.0;
 static string sFzName;
 static string sHName;
 static string sRName;
 static string sSName;
 
-void AfxMessageBox(CString aMsg, bool send=true) {
-	std::cout << "### SimuClient MESSAGE: " << aMsg << std::endl;
-	stringstream msg;
-	msg << "msg Simuclient MESSAGE: " << aMsg << "#";
-	if (send) {
-		ClientSocket->Send(msg);
-	}
+void AfxMessageBox(CString aMsg, bool send = true)
+{
+   std::cout << "### SimuClient MESSAGE: " << aMsg << std::endl;
+   stringstream msg;
+   msg << "msg Simuclient MESSAGE: " << aMsg << "#";
+   if (send)
+   {
+      ClientSocket->Send(msg);
+   }
 }
 
-bool bStreetOk(const string& sName, bool bNeu)
+bool bStreetOk(const string &sName, bool bNeu)
 {
    if (sName.empty())
    {
@@ -90,11 +92,13 @@ bool bStreetOk(const string& sName, bool bNeu)
    return true;
 }
 
-void executeProgram(std::string programName) {
-    system(programName.c_str());
+void executeProgram(std::string programName)
+{
+   system(programName.c_str());
 }
 
-SIMUCLIENT_API bool bInitialisiereGrafik(int sizeX, int sizeY, const char* address, const char* port) {
+SIMUCLIENT_API bool bInitialisiereGrafik(int sizeX, int sizeY, const char *address, const char *port)
+{
 
    initialized = false;
    if ((sizeX < 100) || (sizeX > 2000))
@@ -113,17 +117,18 @@ SIMUCLIENT_API bool bInitialisiereGrafik(int sizeX, int sizeY, const char* addre
    // fuer CIP-Pool dynamische Ports
    Port = port;
    std::stringstream s;
-   s <<  (int) (time(0) % 1000 + 8000);
+   s << (int)(time(0) % 1000 + 8000);
    Port = s.str();
 
    string programName = "java -jar /Users/kyotun/Desktop/rwth-prinf/Aufgabenblock_3/src/SimuServer.jar " + Port;
-   std::thread worker (executeProgram, programName);
+   std::thread worker(executeProgram, programName);
    worker.detach();
-   //std::this_thread::sleep_for (std::chrono::seconds(2));
+   // std::this_thread::sleep_for (std::chrono::seconds(2));
    vSleep(2000);
 
    ClientSocket = new CSocket();
-   if (!ClientSocket->Create()) {
+   if (!ClientSocket->Create())
+   {
       AfxMessageBox(CString("TCP/IP-Verbindung nicht moeglich!"), false);
       return false;
    }
@@ -139,14 +144,15 @@ SIMUCLIENT_API bool bInitialisiereGrafik(int sizeX, int sizeY, const char* addre
       iCount++;
       vSleep(300);
    }
-   if (iCount < 0) {
-         AfxMessageBox(CString("Connect nicht moeglich! (Firewall?) Grafikausgaben werden unterdrueckt."), false);
-         return false;
+   if (iCount < 0)
+   {
+      AfxMessageBox(CString("Connect nicht moeglich! (Firewall?) Grafikausgaben werden unterdrueckt."), false);
+      return false;
    }
    stringstream msg;
    msg << "init " << sizeX << " " << sizeY << "#";
    ClientSocket->Send(msg);
-   //AfxMessageBox(msg);
+   // AfxMessageBox(msg);
    vSleep(100);
 
    initialized = true;
@@ -155,11 +161,13 @@ SIMUCLIENT_API bool bInitialisiereGrafik(int sizeX, int sizeY, const char* addre
    return true;
 }
 
-SIMUCLIENT_API bool bZeichneKreuzung(int posX, int posY) {
+SIMUCLIENT_API bool bZeichneKreuzung(int posX, int posY)
+{
 
    if (!initialized)
       return false;
-   if ((posX > 0) && (posX < iXSize)) {
+   if ((posX > 0) && (posX < iXSize))
+   {
       if ((posY > 0) && (posY < iYSize))
       {
          stringstream msg;
@@ -176,7 +184,8 @@ SIMUCLIENT_API bool bZeichneKreuzung(int posX, int posY) {
    return false;
 }
 
-SIMUCLIENT_API void vBeendeGrafik() {
+SIMUCLIENT_API void vBeendeGrafik()
+{
 
    if (initialized)
    {
@@ -191,48 +200,58 @@ SIMUCLIENT_API void vBeendeGrafik() {
    }
 }
 
-SIMUCLIENT_API bool bLoescheFahrzeug(const std::string& name) {
-	return true;
+SIMUCLIENT_API bool bLoescheFahrzeug(const std::string &name)
+{
+   return true;
 }
 
-SIMUCLIENT_API void vSetzeZeit(const double dZeit) {
-	if (dZeit > 0.0)
-		 dTime = dZeit;
-	if (initialized) {
-		stringstream msg;
-		msg << "time " << dTime << "#";;
-		ClientSocket->Send(msg);
-	}
-	return;
+SIMUCLIENT_API void vSetzeZeit(const double dZeit)
+{
+   if (dZeit > 0.0)
+      dTime = dZeit;
+   if (initialized)
+   {
+      stringstream msg;
+      msg << "time " << dTime << "#";
+      ;
+      ClientSocket->Send(msg);
+   }
+   return;
 }
 
 #if !USE_GENERIC_BUT_CPU_INTENSIVE_SLEEP
-SIMUCLIENT_API void vSleep(int mSec) {
-	if (mSec > 0)
-		std::this_thread::sleep_for(std::chrono::milliseconds(mSec));
-	return;
+SIMUCLIENT_API void vSleep(int mSec)
+{
+   if (mSec > 0)
+      std::this_thread::sleep_for(std::chrono::milliseconds(mSec));
+   return;
 }
 #else
-SIMUCLIENT_API void vSleep(int mSec) {
-    typedef boost::posix_time::ptime system_time;
-    system_time current, start;
-    if (mSec > 0 && mSec < 10000) {
+SIMUCLIENT_API void vSleep(int mSec)
+{
+   typedef boost::posix_time::ptime system_time;
+   system_time current, start;
+   if (mSec > 0 && mSec < 10000)
+   {
 
-        start = boost::get_system_time();
-        current = start;
-        while ((current - start).total_milliseconds() < mSec) {
-            current = boost::get_system_time();
-        }
-    }
-	return;
+      start = boost::get_system_time();
+      current = start;
+      while ((current - start).total_milliseconds() < mSec)
+      {
+         current = boost::get_system_time();
+      }
+   }
+   return;
 }
 #endif
 
-SIMUCLIENT_API bool bLoescheFahrzeug(const char* name) {
-	return true;
+SIMUCLIENT_API bool bLoescheFahrzeug(const char *name)
+{
+   return true;
 }
 
-bool x_bSetStreet(int length, int numPoints, int* points_xy) {
+bool x_bSetStreet(int length, int numPoints, int *points_xy)
+{
 
    if (!initialized)
       return false;
@@ -246,14 +265,15 @@ bool x_bSetStreet(int length, int numPoints, int* points_xy) {
       AfxMessageBox(CString("Mindestens 2 Punkte fuer Strasse erforderlich."));
       return false;
    }
-   if (bStreetOk(sHName,true) && bStreetOk(sRName,true))
+   if (bStreetOk(sHName, true) && bStreetOk(sRName, true))
    {
       stringstream msg;
       msg << "street " << sHName << " " << sRName << " ";
       msg << length << " " << numPoints;
-      for (int i=0; i < numPoints*2; i+=2) {
+      for (int i = 0; i < numPoints * 2; i += 2)
+      {
          int iX = points_xy[i];
-         int iY = points_xy[i+1];
+         int iY = points_xy[i + 1];
          if ((iX > 0) && (iX < iXSize))
             if ((iY > 0) && (iY < iYSize))
             {
@@ -278,7 +298,8 @@ bool x_bSetStreet(int length, int numPoints, int* points_xy) {
       return false;
 }
 
-bool x_bSet(char cTyp, double rel_position, double speed, double tank=0.0) {
+bool x_bSet(char cTyp, double rel_position, double speed, double tank = 0.0)
+{
 
    if (!initialized)
       return false;
@@ -345,7 +366,7 @@ bool x_bSet(char cTyp, double rel_position, double speed, double tank=0.0) {
          CString sText;
          // if (dTime-dLastTime > 0.09)
          {
-					 // TODO Reformat and send time string
+            // TODO Reformat and send time string
             /*sText.Format(CString("%s %8.2f"),CString(" // Aktuelle Zeit:"),dTime);
             vNewTitle(sText);
             dLastTime = dTime;*/
@@ -364,74 +385,86 @@ bool x_bSet(char cTyp, double rel_position, double speed, double tank=0.0) {
    }
 }
 
-SIMUCLIENT_API bool bZeichneStrasse(const char* way_to_name, const char* way_back_name, int length, int numPoints, int* points_xy) {
+SIMUCLIENT_API bool bZeichneStrasse(const char *way_to_name, const char *way_back_name, int length, int numPoints, int *points_xy)
+{
    sHName = string(way_to_name);
    sRName = string(way_back_name);
    return x_bSetStreet(length, numPoints, points_xy);
 }
 
-SIMUCLIENT_API bool bZeichneStrasse(const string& way_to_name, const char* way_back_name, int length, int numPoints, int* points_xy) {
+SIMUCLIENT_API bool bZeichneStrasse(const string &way_to_name, const char *way_back_name, int length, int numPoints, int *points_xy)
+{
    sHName = way_to_name;
    sRName = string(way_back_name);
    return x_bSetStreet(length, numPoints, points_xy);
 }
 
-SIMUCLIENT_API bool bZeichneStrasse(const char* way_to_name, const string& way_back_name, int length, int numPoints, int* points_xy) {
+SIMUCLIENT_API bool bZeichneStrasse(const char *way_to_name, const string &way_back_name, int length, int numPoints, int *points_xy)
+{
    sHName = string(way_to_name);
    sRName = way_back_name;
    return x_bSetStreet(length, numPoints, points_xy);
 }
 
-SIMUCLIENT_API bool bZeichneStrasse(const string& way_to_name, const string& way_back_name, int length, int numPoints, int* points_xy) {
+SIMUCLIENT_API bool bZeichneStrasse(const string &way_to_name, const string &way_back_name, int length, int numPoints, int *points_xy)
+{
    sHName = way_to_name;
    sRName = way_back_name;
    return x_bSetStreet(length, numPoints, points_xy);
 }
 
-SIMUCLIENT_API bool bZeichnePKW(const string& carname, const char* streetname, double rel_position, double speed, double tank) {
+SIMUCLIENT_API bool bZeichnePKW(const string &carname, const char *streetname, double rel_position, double speed, double tank)
+{
    sFzName = carname;
    sSName = string(streetname);
-   return x_bSet('c',rel_position,speed,tank);
+   return x_bSet('c', rel_position, speed, tank);
 }
 
-SIMUCLIENT_API bool bZeichnePKW(const string& carname, const string& streetname, double rel_position, double speed, double tank) {
+SIMUCLIENT_API bool bZeichnePKW(const string &carname, const string &streetname, double rel_position, double speed, double tank)
+{
    sFzName = carname;
    sSName = streetname;
-   return x_bSet('c',rel_position,speed,tank);
+   return x_bSet('c', rel_position, speed, tank);
 }
 
-SIMUCLIENT_API bool bZeichneFahrrad(const string& bikename, const string& streetname, double rel_position, double speed) {
+SIMUCLIENT_API bool bZeichneFahrrad(const string &bikename, const string &streetname, double rel_position, double speed)
+{
    sFzName = bikename;
    sSName = streetname;
-   return x_bSet('b',rel_position,speed);
+   return x_bSet('b', rel_position, speed);
 }
 
-SIMUCLIENT_API bool bZeichneFahrrad(const string& bikename, const char* streetname, double rel_position, double speed) {
+SIMUCLIENT_API bool bZeichneFahrrad(const string &bikename, const char *streetname, double rel_position, double speed)
+{
    sFzName = bikename;
    sSName = string(streetname);
-   return x_bSet('b',rel_position,speed);
+   return x_bSet('b', rel_position, speed);
 }
 
-SIMUCLIENT_API bool bZeichnePKW(const char* carname, const char* streetname, double rel_position, double speed, double tank) {
+SIMUCLIENT_API bool bZeichnePKW(const char *carname, const char *streetname, double rel_position, double speed, double tank)
+{
    sFzName = string(carname);
    sSName = string(streetname);
-   return x_bSet('c',rel_position,speed,tank);
+   return x_bSet('c', rel_position, speed, tank);
 }
 
-SIMUCLIENT_API bool bZeichnePKW(const char* carname, const string& streetname, double rel_position, double speed, double tank) {
+SIMUCLIENT_API bool bZeichnePKW(const char *carname, const string &streetname, double rel_position, double speed, double tank)
+{
    sFzName = string(carname);
    sSName = streetname;
-   return x_bSet('c',rel_position,speed,tank);
+   return x_bSet('c', rel_position, speed, tank);
 }
 
-SIMUCLIENT_API bool bZeichneFahrrad(const char* bikename, const char* streetname, double rel_position, double speed) {
+SIMUCLIENT_API bool bZeichneFahrrad(const char *bikename, const char *streetname, double rel_position, double speed)
+{
    sFzName = string(bikename);
    sSName = string(streetname);
-   return x_bSet('b',rel_position,speed);
+   return x_bSet('b', rel_position, speed);
 }
 
-SIMUCLIENT_API bool bZeichneFahrrad(const char* bikename, const string& streetname, double rel_position, double speed) {
+SIMUCLIENT_API bool bZeichneFahrrad(const char *bikename, const string &streetname, double rel_position, double speed)
+{
    sFzName = string(bikename);
    sSName = streetname;
-   return x_bSet('b',rel_position,speed);
+   return x_bSet('b', rel_position, speed);
 }

@@ -8,16 +8,16 @@ namespace vertagt
 	class VAktion
 	{
 	protected:
-		std::list<T>& p_pListe;  // Zeiger auf Liste der Objekte
+		std::list<T> &p_pListe; // Zeiger auf Liste der Objekte
 
 	public:
-		//Kein Standardkonstruktor wird benotigt.
-		VAktion(std::list<T>& ptListe) : p_pListe(ptListe){}
+		// Kein Standardkonstruktor wird benotigt.
+		VAktion(std::list<T> &ptListe) : p_pListe(ptListe) {}
 		virtual ~VAktion() = default;
 		virtual void vAusfuehren() = 0;
 	};
 
-    // PushBack
+	// PushBack
 	template <class T>
 	class VPushBack : public VAktion<T>
 	{
@@ -25,8 +25,8 @@ namespace vertagt
 		T p_objekt;
 
 	public:
-		//Es waere sinnlos, um ein Standardkonstruktor zu erzeugen.
-		VPushBack(std::list<T>& liste, T obj) : VAktion<T>(liste), p_objekt(std::move(obj))	{}
+		// Es waere sinnlos, um ein Standardkonstruktor zu erzeugen.
+		VPushBack(std::list<T> &liste, T obj) : VAktion<T>(liste), p_objekt(std::move(obj)) {}
 		virtual ~VPushBack() = default;
 		void vAusfuehren() override
 		{
@@ -34,14 +34,15 @@ namespace vertagt
 		}
 	};
 
-    // PushFront
+	// PushFront
 	template <class T>
 	class VPushFront : public VAktion<T>
 	{
 	private:
 		T p_objekt;
+
 	public:
-		VPushFront(std::list<T>& liste, T obj): VAktion<T>(liste), p_objekt(std::move(obj)){}
+		VPushFront(std::list<T> &liste, T obj) : VAktion<T>(liste), p_objekt(std::move(obj)) {}
 		virtual ~VPushFront() = default;
 		void vAusfuehren() override
 		{
@@ -49,7 +50,7 @@ namespace vertagt
 		}
 	};
 
-    // Erase
+	// Erase
 	template <class T>
 	class VErase : public VAktion<T>
 	{
@@ -57,10 +58,10 @@ namespace vertagt
 		using iterator = typename std::list<T>::iterator;
 
 	private:
-		iterator p_it;  // bei erase Iterator speichern
+		iterator p_it; // bei erase Iterator speichern
 
 	public:
-		VErase(std::list<T>& liste, iterator it) : VAktion<T>(liste), p_it(std::move(it)){}
+		VErase(std::list<T> &liste, iterator it) : VAktion<T>(liste), p_it(std::move(it)) {}
 		virtual ~VErase() = default;
 		void vAusfuehren() override
 		{
@@ -68,4 +69,4 @@ namespace vertagt
 		}
 	};
 
-}  // namespace vertagt
+} // namespace vertagt

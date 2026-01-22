@@ -8,23 +8,25 @@ class Fahrzeug;
 
 using namespace std;
 
-class Verhalten{
+class Verhalten
+{
 public:
 	// Konstruktoren
 	Verhalten() = default;
-	Verhalten(Weg& weg): p_pWeg(&weg){}
+	Verhalten(Weg &weg) : p_pWeg(&weg) {}
 
 	// Destruktor
-	virtual ~Verhalten(){}
+	virtual ~Verhalten() {}
 
 	// Getters
-	Weg* getpWeg() const{return p_pWeg;}
+	Weg *getpWeg() const { return p_pWeg; }
 
-    // Double
-	virtual double dStrecke(Fahrzeug& aFzg, double dZeitIntervall) = 0;
+	// Double
+	virtual double dStrecke(Fahrzeug &aFzg, double dZeitIntervall) = 0;
 
 protected:
-	Weg* p_pWeg = nullptr;
+	Weg *p_pWeg = nullptr;
+
 private:
 };
 

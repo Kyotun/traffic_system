@@ -28,7 +28,7 @@ namespace vertagt
 			p_objekte.clear();
 		}
 
-        void clear()
+		void clear()
 		{
 			p_objekte.clear();
 		}
@@ -73,32 +73,30 @@ namespace vertagt
 			return p_objekte.empty();
 		}
 
-        // Schreibfunktionen
+		// Schreibfunktionen
 		void push_back(T obj)
 		{
 			// Aktionselement fuer PushBack auf Liste erzeugen
 			p_aktionen.push_back(make_unique<VPushBack<T>>(p_objekte, std::move(obj)));
-
 		}
 
 		void push_front(T obj)
 		{
 			// Aktionselement fuer PushBack auf Liste erzeugen
 			p_aktionen.push_back(make_unique<VPushFront<T>>(p_objekte, std::move(obj)));
-
 		}
 
 		void erase(iterator it)
 		{
 			// Aktionselement fuer PushBack auf Liste erzeugen (hier Iterator statt Objekt !)
-			p_aktionen.push_back(make_unique<VErase<T>>(p_objekte,it));
+			p_aktionen.push_back(make_unique<VErase<T>>(p_objekte, it));
 		}
 
-        // Aenderungen auf Objektliste uebertragen
+		// Aenderungen auf Objektliste uebertragen
 		void vAktualisieren()
 		{
 			// Aenderungen auf Objektliste uebertragen
-			for (auto& pAktion : p_aktionen)
+			for (auto &pAktion : p_aktionen)
 			{
 				// Aktion ausfuehren
 				pAktion->vAusfuehren();
@@ -106,7 +104,5 @@ namespace vertagt
 			// Aktionsliste loeschen
 			p_aktionen.clear();
 		}
-
-
 	};
 } // namespace vertagt
